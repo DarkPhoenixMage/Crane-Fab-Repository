@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crane Fab</title>
+  <meta name="description" content="We want this to be 100 to 150 characters" />
+  <link rel="stylesheet" href="Styles.css" />
+  <link href="https://fonts.cdnfonts.com/css/black-chancery" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="General_Sight_Cosmetics/favicon.ico" />
+
+</head>
+<body>
+  <header>
+    <div class="logo">  <!--/* Need to work on the logo rounding */-->
+      <li><a href="Page_1_Home.html"><img src="General_Sight_Cosmetics/Crane_fab_Logo.png" alt="Crane Fab Crest" width="60" height="60" loading="lazy" class="fade-in" /></a></li>
+    </div>
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="Page_1_Home.html">Home</a></li>
+        <li><a href="Page_2_About.html">About</a></li>
+        <li><a href="Page_3_Services.html">Services</a></li>
+        <li><a href="Page_4_Gallery.html">Gallery</a></li>
+        <li class="nav-parent">
+          <a href="Page_4.5_Project.html">Projects</a>
+          <button class="nav-caret" aria-label="Toggle Projects submenu" aria-expanded="false">▼</button>
+          <ul class="nav-submenu">
+            <li><a href="Project_1.html">Project One</a></li>
+            <li><a href="Project_2.html">Project Two</a></li>
+            <li><a href="Project_3.html">Project Three</a></li>
+          </ul>
+        </li>
+        <li><a href="Page_5_Contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="welding-sparks"></div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-left">
+  <img class="hero-crest hero-spotlight fade-in" src="General_Sight_Cosmetics/Family_crest.png" alt="Crane Fab Crest" width="400" height="500" />
+        <div class="hero-copy">
+          <p>Family-built and passion-driven, Crane Fab transforms ideas into handcrafted designs that balance power, beauty, and purpose — where creativity meets craft.</p>
+          <div class="hero-cta-group">
+            <div class="buttons">
+              <a class="btn btn-orange" href="Page_4_Gallery.html">View Our Work</a>
+              <a class="btn btn-white" href="Page_4.5_Project.html">See Our Projects</a>
+            </div>
+
+            <!-- Request a Quote CTA shown below the primary hero actions -->
+            <div class="hero-bottom-cta">
+              <a class="btn btn-orange" href="Page_5_Contact.html">Request a Quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-right" aria-label="Quick links to services">
+        <h3>Our Services</h3>
+        <nav class="hero-services">
+          <a class="service-button" href="Page_3_Services.html#custom-metal">Custom Metal Fabrication</a>
+          <a class="service-button" href="Page_3_Services.html#metal-wood">Metal + Wood Integration</a>
+          <a class="service-button" href="Page_3_Services.html#classic-parts">Classic Parts Inventory</a>
+          <a class="service-button" href="Page_3_Services.html#commercial-projects">Commercial Projects</a>
+          <a class="service-button" href="Page_3_Services.html#custom-projects">Custom Projects</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Crane Fab. All rights reserved.
+  </footer>
+
+  <script>
+  function createSpark() {
+  const spark = document.createElement('div');
+  spark.classList.add('spark');
+
+  // Random start position near bottom
+  spark.style.left = Math.random() * window.innerWidth + 'px';
+  spark.style.top = window.innerHeight - 50 + 'px';
+
+  // Random direction
+  const angle = Math.random() * 360;
+  const distance = Math.random() * 800 + 400;
+  const x = Math.cos(angle * Math.PI / 180) * distance;
+  const y = -Math.abs(Math.sin(angle * Math.PI / 180) * distance); // upward only
+
+  // Apply custom direction to CSS animation
+  spark.style.setProperty('--x', `${x}px`);
+  spark.style.setProperty('--y', `${y}px`);
+
+  // Set animation duration to 8 seconds
+  spark.style.animationDuration = '8s';
+
+  // Add spark to container
+  document.querySelector('.welding-sparks').appendChild(spark);
+
+  // Remove spark after animation ends
+  setTimeout(() => {
+    spark.remove();
+  }, 8000);
+}
+
+// Create sparks in bursts
+setInterval(() => {
+  for (let i = 0; i < 3; i++) createSpark();
+}, 300);
+</script>
+
+<script src="nav.js"></script>
+<script src="image-fade.js"></script>
+
+</body>
+</html>
