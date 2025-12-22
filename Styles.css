@@ -29,7 +29,7 @@ html{ font-size: clamp(16px, 1.2vw, 20px); }
       background-color: #1a1a1a;
       color: white;
       font-size: 1rem;
-        background-image: url('General_Sight_Cosmetics/web_background.svg');
+        background-image: url('general-sight-cosmetics/web-background.svg');
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -47,7 +47,7 @@ html{ font-size: clamp(16px, 1.2vw, 20px); }
       right: 0;
       width: 100%;
       box-sizing: border-box;
-        background-image: url('General_Sight_Cosmetics/web_background.svg');
+        background-image: url('general-sight-cosmetics/web-background.svg');
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -534,7 +534,7 @@ header.nav-open nav ul {
       background-color: #111;
       color: #aaa;
       font-size: 0.9rem;
-      background-image: url('General_Sight_Cosmetics/web_background.svg');
+      background-image: url('general-sight-cosmetics/web-background.svg');
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -964,7 +964,7 @@ header.nav-open nav ul {
   top: 0.25em;
   width: 1.5em;                  /* ~16px */
   height: 1.5em;
-  background: url("General_Sight_Cosmetics/phoenix-icon.svg") no-repeat center center;
+  background: url("general-sight-cosmetics/phoenix-icon.svg") no-repeat center center;
   background-size: contain;    /* scale icon properly */
   opacity: 0.95;
 }
@@ -997,7 +997,7 @@ header.nav-open nav ul {
   top: 0.25em;
   width: 1.4em;
   height: 1.4em;
-  background: url("General_Sight_Cosmetics/phoenix-bullet-grey.svg") no-repeat center center;
+  background: url("general-sight-cosmetics/phoenix-bullet-grey.svg") no-repeat center center;
   background-size: contain;
   opacity: 0.9;            /* slightly softer look */
   filter: drop-shadow(0 0 2px rgba(120,120,120,0.4));
