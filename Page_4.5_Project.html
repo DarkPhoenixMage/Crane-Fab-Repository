@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crane Fab</title>
+  <meta name="description" content="We want this to be 100 to 150 characters" />
+    <link rel="stylesheet" href="Styles.css" />
+    <link rel= 'stylesheet' href= 'Styles_projects.css' />
+  <link href="https://fonts.cdnfonts.com/css/black-chancery" rel="stylesheet" />
+
+</head>
+<body>
+  <header>
+    <div class="logo"> <!-- Need to work on the logo rounding -->
+      <a href="Page_1_Home.html" aria-label="Crane Fab Home">
+        <img src="General_Sight_Cosmetics/Crane_fab_Logo.png" alt="Crane Fab Crest" width="60" height="60" />
+      </a>
+    </div>
+
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="Page_1_Home.html">Home</a></li>
+        <li><a href="Page_2_About.html">About</a></li>
+        <li><a href="Page_3_Services.html">Services</a></li>
+        <li><a href="Page_4_Gallery.html">Gallery</a></li>
+        <li class="nav-parent">
+          <a href="Page_4.5_Project.html" aria-current="page">Projects</a>
+          <button class="nav-caret" aria-label="Toggle Projects submenu" aria-expanded="false">▼</button>
+          <ul class="nav-submenu">
+            <li><a href="Project_1.html">Project One</a></li>
+            <li><a href="Project_2.html">Project Two</a></li>
+            <li><a href="Project_3.html">Project Three</a></li>
+          </ul>
+        </li>
+        <li><a href="Page_5_Contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1>Our Projects</h1>
+        <p>Explore Crane Fab’s creative work — select a project to learn more.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Summary Grid -->
+  <main class="projects" role="main">
+    <section class="project-list" aria-label="Projects">
+      <article class="project-card">
+        <figure>
+          <img src="General_Sight_Cosmetics/project1.jpg" alt="Project One">
+          <figcaption>
+            <h2>Project One: 2001 Pontiac Firebird— Custom Hood Upgrade & Full Color Conversion</h2>
+            <p>This 2001 Pontiac Firebird received a clean, modern transformation through a complete color conversion and a custom hood upgrade. The original white exterior was fully refinished in a deep black finish, giving the car a sharper, more refined presence on the road.</p>
+            <p>We replaced the standard hood with a performance-style design that enhances the Firebird’s aggressive look while staying true to its iconic shape. The new paint and upgraded hood work together to create a striking, unified appearance that elevates the car’s overall style.<p>
+            <p>A bold new look for a classic Firebird — refreshed, upgraded, and ready to stand out.</p>
+            <a href="Project_1.html" class="btn" aria-label="View Project One">View Project</a>
+          </figcaption>
+        </figure>
+      </article>
+
+      <article class="project-card">
+        <figure>
+          <img src="General_Sight_Cosmetics/project2.jpg" alt="Project Two">
+          <figcaption>
+            <h2>Project Two</h2>
+            <p>A short description of this project goes here.</p>
+            <a href="Project_2.html" class="btn" aria-label="View Project Two">View Project</a>
+          </figcaption>
+        </figure>
+      </article>
+
+      <article class="project-card">
+        <figure>
+          <img src="General_Sight_Cosmetics/project3.jpg" alt="Project Three">
+          <figcaption>
+            <h2>Project Three</h2>
+            <p>A short description of this project goes here.</p>
+            <a href="Project_3.html" class="btn" aria-label="View Project Three">View Project</a>
+          </figcaption>
+        </figure>
+      </article>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-cta">
+      <a href="Page_5_Contact.html">Request a Quote</a>
+    </div>
+    <p>&copy; 2025 Crane Fab. All rights reserved.</p>
+  </footer>
+  <script src="nav.js"></script>
+  <script src="image-fade.js"></script>
+</body>
+</html>

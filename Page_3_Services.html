@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crane Fab</title>
+  <link href="https://fonts.cdnfonts.com/css/black-chancery" rel="stylesheet" />
+  <link rel="stylesheet" href="Styles.css" />
+  
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <li><a href="Page_1_Home.html"><img src="General_Sight_Cosmetics/Crane_fab_Logo.png" alt="Crane Fab Crest" width="100" height="100" loading="lazy" class="fade-in" /></a></li>
+    </div>
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="Page_1_Home.html">Home</a></li>
+        <li><a href="Page_2_About.html">About</a></li>
+        <li><a href="Page_3_Services.html">Services</a></li>
+        <li><a href="Page_4_Gallery.html">Gallery</a></li>
+        <li class="nav-parent">
+          <a href="Page_4.5_Project.html">Projects</a>
+          <button class="nav-caret" aria-label="Toggle Projects submenu" aria-expanded="false">▼</button>
+          <ul class="nav-submenu">
+            <li><a href="Project_1.html">Project One</a></li>
+            <li><a href="Project_2.html">Project Two</a></li>
+            <li><a href="Project_3.html">Project Three</a></li>
+          </ul>
+        </li>
+        <li><a href="Page_5_Contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section Class = "about-section">
+    <h1 id="services">Our Services</h1>
+
+    <h2 id="custom-metal">Custom Metal Fabrication</h2>
+    <img src="Service_Page_Images/3 roses and I love You.jpg" alt="Custom Metal Fabrication" class="inline-photo">
+        <ul class="phoenix-list-grey">
+          <li> At Crane Fab, we turn raw metal into art. Our custom metal fabrication service focuses on crafting one-of-a-kind, handmade pieces from ornamental iron, repurposed materials, and scrap metals already on hand. Each build is shaped by creativity and craftsmanship — no two projects are ever the same. </li>
+          <li> From decorative brackets and furniture accents to wall art and small structural builds, every piece we create reflects the character and style that define Crane Fab. We take pride in giving new life to existing materials, transforming them into something bold, functional, and truly unique. </li>
+          <li> Looking for ideas? Visit our Gallery to explore completed projects and spark inspiration for your own custom piece. </li>
+          <li> Every piece tells a story — Where Passion becomes Reality</li>
+        </ul>
+
+    <h2 id="metal-wood">Metal + Wood Integration</h2>
+     <img src="Service_Page_Images/End Table with Roses.jpg" alt="Custom Metal Fabrication" class="inline-photo">
+      <ul class="phoenix-list-grey">
+        <li>we specialize in bringing two timeless materials together — metal and wood — to create pieces that balance strength with natural warmth. Each project is handcrafted, combining steel, iron, or aluminum with solid wood to form unique works that highlight the best qualities of both materials.<li>
+        <li> Whether it’s a custom table frame, shelving unit, countertop support, or decorative installation, our builds focus on clean lines, solid structure, and thoughtful design. Every joint, weld, and finish is handled in-house, ensuring a seamless blend between rugged metalwork and finely finished woodgrain.<li>
+        <li>We often use reclaimed or repurposed materials, giving each project a story and a sense of character that can’t be replicated. From rustic to modern, every piece is designed to complement your space and showcase true craftsmanship.<li>
+        <li>Looking for ideas? Browse our Gallery to see past creations and discover what’s possible when metal meets wood.<li>
+        <li>Built to stand out — where raw steel meets natural grain.</li>
+      </ul >
+
+    <h2 id="classic-parts">Classic Parts Inventory</h2>
+      <ul class="phoenix-list-grey">
+        <li>We maintains a carefully curated collection of classic and vintage vehicle parts, sourced from past restorations and project builds. Our inventory includes original components, salvaged pieces, and cleaned, ready-to-use parts from a wide range of older makes and models.<li>
+        <li> Each item we offer has been inspected and organized for builders, restorers, and collectors who appreciate authentic materials and hard-to-find components. Because our collection is built from real projects, the inventory is always changing — once a part is gone, it’s gone.<li>
+        <li> We value the history behind every piece and aim to give quality parts a second life instead of letting them go to waste. From trim and brackets to suspension pieces and interior hardware, every find has its own story.<li>
+        <li> Looking for something specific or inspiration for your next restoration? Browse our Classic Parts Inventory to see what’s currently available.<li>
+        <li> Preserving history — one classic part at a time.</li>
+    </ul>
+
+    <h2 id="commercial-projects">Commercial Projects</h2>
+      <ul class = "phoenix-list">
+        <Li><strong>COMING SOON</strong></li>
+      <ul>
+
+    <h2 id="custom-projects">Custom Projects</h2>
+      <img src="Service_Page_Images/Firebird_hood_inprogress.jpg" alt="Custom Metal Fabrication" class="inline-photo">
+      <ul class = "phoenix-list">
+        <Li><strong>COMING SOON</strong></li>
+      <ul>
+
+  </section>
+
+
+  <footer>
+    <div class="footer-cta">
+      <a href="Page_5_Contact.html">Request a Quote</a>
+    </div>
+    © 2025 Crane Fab. All rights reserved.
+  </footer>
+  <script>
+  // Smooth-scroll-to-hash and temporary highlight for headings
+  (function () {
+    function scrollToElementWithOffset(el) {
+      if (!el) return;
+      var header = document.querySelector('header');
+      var headerHeight = header ? header.offsetHeight : 0;
+      // Small extra gap so heading isn't flush to the top
+      var offset = 8;
+      var top = el.getBoundingClientRect().top + window.scrollY - headerHeight - offset;
+      // Use instant scroll if user has prefers-reduced-motion
+      var prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: Math.max(0, top), behavior: prefersReduce ? 'auto' : 'smooth' });
+    }
+
+    function highlightOnce(el) {
+      if (!el) return;
+      el.classList.add('section-highlight');
+      // Remove class after 3s (match CSS animation duration)
+      setTimeout(function () { el.classList.remove('section-highlight'); }, 3000);
+    }
+
+    function handleHash(hash) {
+      if (!hash) return;
+      var id = hash.replace('#', '');
+      var el = document.getElementById(id);
+      if (!el) return;
+      // If the id is on a heading (h1/h2/etc.) highlight that. Otherwise highlight the closest section/element.
+      var target = el;
+      // Allow a tiny delay so the browser completes its default jump first (safer across browsers)
+      setTimeout(function () {
+        scrollToElementWithOffset(target);
+        highlightOnce(target);
+      }, 50);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // On initial load, respect existing hash
+      if (window.location.hash) handleHash(window.location.hash);
+
+      // When the hash changes while on the page (e.g., user clicks another link), handle it
+      window.addEventListener('hashchange', function () { handleHash(window.location.hash); }, false);
+    });
+  })();
+  </script>
+  <script src="nav.js"></script>
+  <script src="image-fade.js"></script>
+</body>
+</html>

@@ -1,0 +1,1306 @@
+ @import url('https://fonts.cdnfonts.com/css/black-chancery');
+ * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+:root{
+  --space: 1rem; /* 16px */
+  --space-sm: 0.75rem; /* 12px */
+  --space-lg: 1.5rem; /* 24px */
+  --touch: 2.75rem; /* ~44px touch target */
+  --card-max: 30rem; /* 480px */
+  --card-min: 18rem; /* 288px */
+  --gap: 1.25rem; /* 20px */
+  --bg-overlay: rgba(17,17,17,0.98);
+  --accent: #ff7A00; /* primary header/accent color */
+}
+
+/* Global header color: ensure all h1-h6 use the accent color for consistency */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--accent);
+}
+
+html{ font-size: clamp(16px, 1.2vw, 20px); }
+
+    body {
+      font-family: 'BlackChancery',sans-serif;
+      background-color: #1a1a1a;
+      color: white;
+      font-size: 1rem;
+        background-image: url('General_Sight_Cosmetics/web_background.svg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #111;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      box-sizing: border-box;
+        background-image: url('General_Sight_Cosmetics/web_background.svg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      z-index: 1000;
+    }
+
+    .logo {
+    object-fit: cover;
+    width: auto;
+    height: auto;
+    }
+
+.logo img {
+  width: 3.5rem; /* ~56px */
+  height: auto;
+}
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+/* Responsive navigation toggle (hamburger) */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+/* Small screens: show a hamburger and animate a dropdown menu */
+/* Position the hamburger to the right, vertically centered */
+.nav-toggle {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 900px) {
+  .nav-toggle { display: block; }
+
+  /* Keep nav <ul> in the DOM so we can animate open/close with max-height */
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    right: 12px;
+    top: calc(100% + 8px);
+    background: rgba(17,17,17,0.98);
+    padding: 0; /* padding applied when open */
+    min-width: 180px;
+    border-radius: 8px;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.45);
+    z-index: 1200;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: max-height 260ms ease, opacity 220ms ease, transform 220ms ease, padding 220ms ease;
+  }
+
+  /* When nav is opened (header gets .nav-open) we expand the menu */
+  header.nav-open nav ul {
+    max-height: 480px; /* enough for several items */
+    opacity: 1;
+    transform: translateY(0);
+    padding: 10px;
+  }
+
+  nav ul li {
+    padding: 8px 12px;
+  }
+
+  nav ul li a { display: block; }
+}
+
+/* Very small screens: make the dropdown full width under the header */
+@media (max-width: 600px) {
+  .nav-toggle { right: 12px; }
+  nav ul {
+    left: 0;
+    right: 0;
+    min-width: auto;
+    border-radius: 0;
+    top: 100%;
+  }
+}
+
+/* SUBMENU STYLING */
+.nav-parent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* Caret toggle button: only shown on small screens or touch devices.
+   Desktop users hover the parent or caret, and the submenu appears. */
+.nav-caret {
+  display: none;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 0.7rem;
+  padding: 4px 6px;
+  cursor: pointer;
+  transition: color 150ms ease, transform 150ms ease;
+  font-weight: bold;
+  align-self: center;
+}
+
+.nav-caret:hover {
+  color: var(--accent);
+}
+
+.nav-caret[aria-expanded="true"] {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+
+/* Show caret on small/touch screens */
+@media (max-width: 900px), (hover: none) {
+  .nav-caret { display: block; }
+}
+
+.nav-submenu {
+  list-style: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(17, 17, 17, 0.98);
+  min-width: 160px;
+  border-radius: 6px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  padding: 8px 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  /* keep a tiny overlap when hidden so the pointer can move from parent -> submenu
+     without crossing a gap; visible state will translate to 0 */
+  transform: translateY(-3px);
+  /* Shorter transitions and shorter hide delay so menu feels responsive */
+  transition: opacity 150ms ease, transform 150ms ease, visibility 0s linear 220ms;
+  transition-delay: 120ms;
+  z-index: 1300;
+}
+
+/* Show on hover or keyboard focus-within or when hovering the submenu itself; remove hide delay so appearance is quick */
+.nav-parent:hover .nav-submenu,
+.nav-parent:focus-within .nav-submenu,
+.nav-submenu:hover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: 0s; /* immediate show */
+}.nav-submenu li { padding: 0; }
+
+.nav-submenu li a {
+  display: block;
+  padding: 10px 16px;
+  color: white;
+  text-decoration: none;
+  font-weight: 400;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.nav-submenu li a:hover {
+  background: rgba(255, 122, 0, 0.15);
+  color: var(--accent);
+}
+
+.nav-submenu li a[aria-current="page"] {
+  background: rgba(255, 122, 0, 0.25);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Make the main nav allow overflow when open so the submenu (which may extend
+   outside the nav container) can be visible on small screens. */
+header.nav-open nav ul {
+  overflow: visible;
+}
+
+/* Tablet and small screens: keep submenu visible on hover, but position it to the left
+   of the parent item when the nav is in hamburger mode so it doesn't cover other links. */
+@media (max-width: 900px) {
+  /* In hamburger layout the main nav is usually aligned to the right; make the submenu
+     open to the left of the parent link so it doesn't obscure the stacked links. */
+  .nav-submenu {
+    top: 0;
+    left: auto;
+    right: 100%; /* align right edge to parent's left edge (no gap) */
+    min-width: 150px;
+    transform: translateY(0) translateX(-4px);
+    transition: opacity 140ms ease, transform 140ms ease, visibility 0s linear 220ms;
+    transition-delay: 120ms;
+    z-index: 1400;
+  }
+
+  .nav-parent:hover .nav-submenu,
+  .nav-parent:focus-within .nav-submenu,
+  .nav-parent.active .nav-submenu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) translateX(0);
+    transition-delay: 0s;
+  }
+
+  .nav-submenu li a { padding: 10px 14px; font-size: 0.95rem; }
+}
+
+/* Very small screens: slightly more compact */
+@media (max-width: 600px) {
+  /* On very small screens (phones), the main nav becomes a stacked column inside
+     the hamburger. In this layout it's clearer and more reliable to expand the
+     submenu inline rather than positioning it absolutely off to the side. */
+  .nav-submenu {
+    position: static !important;
+    right: auto !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    display: none; /* show only when active */
+    background: rgba(20,20,20,0.95);
+    box-shadow: none;
+    border-radius: 6px;
+    padding-left: 12px;
+    margin-top: 4px;
+  }
+
+  /* When the parent is active (caret tapped) or focused, reveal the submenu inline */
+  .nav-parent.active .nav-submenu,
+  .nav-parent:focus-within .nav-submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-submenu li a { padding: 8px 12px; font-size: 0.95rem; }
+}
+
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: url('hero-bg.jpg') center/cover no-repeat;
+    }
+/* Center the hero content vertically and keep the grid centered */
+.hero {
+  /* Slightly larger hero to give more presence on the homepage */
+  min-height: 70vh; /* increased from 60vh */
+  display: flex;
+  align-items: center; /* vertically center the grid */
+  justify-content: center;
+  padding-top: 4rem; /* a bit more breathing room */
+  padding-bottom: 4rem;
+}
+
+/* Make the hero slightly shorter on small screens but still larger than before */
+@media (max-width: 600px) {
+  .hero { min-height: 55vh; padding-top: 2rem; padding-bottom: 2rem; }
+}
+
+/* Temporary attention animation on the hero image that fades away */
+.hero-spotlight {
+  /* run once and keep final state cleared */
+  animation: heroSpotlight 3s ease-out forwards;
+  will-change: transform, filter, box-shadow;
+}
+
+@keyframes heroSpotlight {
+  0% {
+    transform: scale(1.02);
+    filter: brightness(1.08) saturate(1.15);
+    box-shadow: 0 0 0 0 rgba(255,140,0,0.0);
+  }
+  20% {
+    transform: scale(1.04);
+    filter: brightness(1.2) saturate(1.2);
+    box-shadow: 0 0 48px 14px rgba(255,140,0,0.65);
+  }
+  60% {
+    transform: scale(1.02);
+    filter: brightness(1.05) saturate(1.05);
+    box-shadow: 0 0 24px 6px rgba(255,140,0,0.28);
+  }
+  100% {
+    transform: none;
+    filter: none;
+    box-shadow: none;
+    opacity: 1;
+  }
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-spotlight { animation: none; transform: none; filter: none; box-shadow: none; }
+}
+
+/* Two-column hero layout: left = image + copy, right = quick service links */
+.hero-grid {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-left {
+  flex: 1 1 60%;
+  display: flex;
+  gap: 1.25rem;
+  align-items: center; /* center content vertically so copy/buttons sit centered beside the image */
+  flex-wrap: wrap; /* allow the image and copy to wrap when space is constrained */
+}
+
+.hero-crest {
+  max-width: 360px;
+  /* let the image scale, but reserve a sensible minimum so copy can flow beside it */
+  width: clamp(140px, 40%, 360px);
+  min-width: 140px;
+  height: auto;
+  border-radius: 0.5rem;
+  flex: 0 0 auto; /* prevent the image from shrinking to nothing */
+}
+
+.hero-copy {
+  flex: 1 1 50%;
+  min-width: 260px; /* when remaining space is less than this, the copy will wrap below the image */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center the paragraph and buttons horizontally within the left column */
+  justify-content: center; /* keep copy vertically centered relative to the image */
+  text-align: center; /* ensure text centers with the buttons */
+}
+
+.hero-right {
+  width: 18rem;
+}
+
+.hero-right h3 {
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  text-align: left;
+}
+
+.hero-services { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.service-button {
+  display: inline-block;
+  text-decoration: none;
+  background: #ff7a00;
+  color: white;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  font-family: 'Times New Roman', Times, serif;
+  /* smooth transform/shadow/color transitions for the hover "flare" */
+  transition: transform 160ms ease, box-shadow 160ms ease, color 160ms ease;
+}
+
+.service-button:hover {
+  /* subtle lift + slight scale to create a "flare" feel */
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 28px rgba(255,77,0,0.22);
+  color: #3d17ca; /* stronger red for hovered button text */
+  
+}
+
+    .hero img {
+      border: 4px solid transparent;
+     border-image: linear-gradient(to right, #7F1D1D, #B7410E, #FF4500) 1;
+    }
+
+    .hero h1 {
+      font-size: 3.4rem; /* slightly larger headline for more presence */
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      margin-bottom: 1.5em;
+      line-height: 1.6;
+      text-indent: 6 em;
+      font-family: 'Black Chancery', serif;
+      color: #ccc;
+    }
+    
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    /* Hero bottom CTA (centered under primary CTAs) */
+    .hero-bottom-cta {
+      text-align: center;
+      margin-top: 1rem;
+      font-family: 'Times New Roman', Times, serif;
+    }
+    .hero-bottom-cta .btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 1.2rem;
+    }
+
+    /* Group that holds the top actions and the bottom CTA; this allows the bottom CTA to match the width
+       of the top buttons by using the group's intrinsic width. */
+    .hero-cta-group {
+      display: inline-block;
+      text-align: center;
+      width: auto;
+    }
+
+    /* When the group is inline-block, make the bottom CTA fill the group's width */
+    .hero-cta-group .hero-bottom-cta { width: 100%; }
+    .hero-cta-group .hero-bottom-cta .btn { display: block; width: 100%; }
+
+    @media (max-width: 600px) {
+      .hero-bottom-cta { margin-top: 0.6rem; }
+      .hero-bottom-cta .btn { width: 100%; }
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 1.2rem;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      /* allow color/transform/box-shadow transitions for the hover flare */
+      transition: background 0.3s, transform 160ms ease, box-shadow 160ms ease, color 160ms ease;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .btn-orange {
+      background-color: #ff7A00;
+      color: white;
+    }
+
+    .btn-orange:hover {
+      background-color: #ff7A00;
+      color: #3d17ca;
+    }
+
+    .btn-white {
+      background-color: #ff7A00;
+      color: white;
+    }
+
+    .btn-white:hover {
+      background-color: #ff7A00;
+      color: #3d17ca;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #111;
+      color: #aaa;
+      font-size: 0.9rem;
+      background-image: url('General_Sight_Cosmetics/web_background.svg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .footer-cta {
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-cta a {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: #ff7A00;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 1.1rem;
+      transition: background 0.3s, transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .footer-cta a:hover {
+      background-color: darkorange;
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(255,77,0,0.25);
+      color: #3d17ca;
+    }
+
+.welding-sparks {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.spark {
+  position: absolute;
+  width: 0.375rem; /* 6px */
+  height: 0.375rem;
+  background: radial-gradient(circle, #7F1D1D, #B7410E, #FF4500);
+  border-radius: 50%;
+  opacity: 0.95;
+  animation: fly 8s ease-out forwards;
+  filter: drop-shadow(0 0 0.375rem #CC5500); /* 6px -> 0.375rem */
+}
+
+.about-section {
+  line-height: 1.8;
+  text-align: left;
+  margin: 1em auto;
+  width: 90%; /* optional: controls paragraph width */
+  font-size: 1em;
+}
+
+.about-section h1 {
+  color: var(--accent);
+  clear: both;           /* clear floated images to prevent staircase effect */
+}
+
+.about-section li {
+  margin-bottom: 1em;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: inherit;
+}
+
+
+/* 🎨 Gallery Container */
+.gallery {
+  padding: 2rem;
+  background: #1a1a1a;
+  font-family: 'BlackChancery', sans-serif;
+}
+
+.gallery h1,
+.gallery h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: 'BlackChancery', sans-serif;
+}
+
+/* 🖼️ Gallery Layout */
+.gallery-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+.gallery-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: var(--gap);
+  -webkit-overflow-scrolling: touch;
+  /* Hide native horizontal scrollbar but keep scrolling functional */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  /* Give room for circular arrows so items don't sit behind them */
+  padding: 0 4rem;
+  box-sizing: content-box; /* keep padding outside the flex children */
+  overscroll-behavior-x: contain; /* prevent scroll chaining on mobile */
+}
+
+/* WebKit browsers (Chrome, Safari, newer Edge) - hide horizontal scrollbar */
+.gallery-track::-webkit-scrollbar {
+  height: 0; /* hide horizontal scrollbar */
+  background: transparent;
+}
+
+/* 📷 Image Styling */
+.gallery-item img {
+ width: 100%;
+  height: 100%;
+  object-fit: contain; /* or cover */
+  display: block;
+  transition: opacity 0.5s ease, box-shadow 0.5s ease, border 0.5s ease;
+  border: none;
+  box-shadow: none;
+   flex-shrink: 0;
+}
+
+
+/* 🧩 Gallery Item with Description Overlay */
+.gallery-item {
+  position: relative;
+  width: clamp(var(--card-min), 28vw, var(--card-max));
+  height: clamp(16rem, 22vw, 22.5rem);
+  overflow: hidden;
+  border-radius: 0.5rem; /* 8px */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  
+}
+
+.gallery-item .description {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  color: #ff7A00;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem; /* ~20px */
+  text-align: center;
+  transition: opacity .4s ease;
+  font-family: "new times roman", serif;
+}
+
+.gallery-item:hover img {
+  opacity: 0.6; 
+}
+
+.gallery-item:hover .description {
+  opacity: 1; /* Slight fade */
+  border: 0.125rem solid #ff7A00; /* 2px */
+  box-shadow: 0 0 15px 0.3125rem #ff7A00; /* 5px -> 0.3125rem */
+}
+
+
+/* ➡️ Navigation Arrows */
+.arrow {
+  display: flex;                /* Enables flexbox */
+  align-items: center;          /* Vertically center */
+  justify-content: center;      /* Horizontally center */
+  width: 3.75rem;               /* ~60px */
+  height: 3.75rem;
+  background: linear-gradient(to bottom, #3a3a3a, #1a1a1a);
+  color: #FF7A00;
+  border: 0.125rem solid #FF7A00; /* 2px */
+  border-radius: 50%;
+  padding: 0.75rem 1rem;
+  font-size: 2em;
+  font-family: 'BlackChancery', serif;
+  box-shadow: 0 0 0.625rem #FF7A00; /* 10px -> 0.625rem */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  top: 50%;
+  z-index: 10;
+}
+
+.arrow.left {
+  left: 0.625rem; /* ~10px */
+}
+
+.arrow.right {
+  right: 0.625rem; /* ~10px */
+}
+
+.arrow:hover {
+  box-shadow: 0 0 20px #ff7A00;
+  opacity: 1;
+}
+
+/* Consolidated "flare" hover style applied to main interactive elements.
+   This keeps behavior consistent across .btn, .service-button, arrows, social links and form buttons. */
+.btn:hover,
+.service-button:hover,
+.arrow:hover,
+.social-links a:hover,
+.contact-form button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(255,77,0,0.25);
+  color: #3D17CA; /* stronger red for hover text */
+}
+/* Image fade-in effect for smooth loading on slow networks */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.8s ease-in;
+}
+
+.fade-in.loaded {
+  opacity: 1;
+}
+
+/* Loading spinner for images while they load (gallery + general) */
+.image-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 122, 0, 0.18);
+  border-top: 3px solid #ff7A00;
+  border-radius: 50%;
+  animation: cf-spin 0.9s linear infinite;
+  z-index: 5;
+  pointer-events: none;
+}
+
+@keyframes cf-spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Ensure gallery items are positioned so loader can be centered over the image */
+.gallery-item { position: relative; }
+
+/* Hide loader by default; JS will show until image loads */
+.image-loader[hidden] { display: none !important; }
+
+/* --- Responsive adjustments: padding, item sizing, arrow sizing --- */
+@media (max-width: 1200px) {
+  .gallery-track {
+    gap: 1.125rem; /* 18px */
+    padding: 0 3.5rem; /* 56px */
+  }
+  .gallery-item {
+    width: 22.5rem; /* 360px */
+    height: 16.875rem; /* 270px */
+  }
+  .arrow {
+    width: 3.375rem; /* 54px */
+    height: 3.375rem;
+    font-size: 1.8em;
+    padding: 0.625rem 0.875rem; /* ~10px 14px */
+  }
+}
+
+@media (max-width: 900px) {
+  /* Tablet */
+  .gallery-track {
+    gap: 1rem; /* 16px */
+    padding: 0 3rem; /* 48px */
+  }
+  /* Ensure hero columns and inner left content stack and center on tablet sizes */
+  .hero-grid { flex-direction: column; gap: 1.25rem; }
+  .hero-right { width: 100%; margin-top: 0.75rem; }
+  .hero-crest { width: 100%; max-width: 420px; margin: 0 auto; }
+  .hero-left { flex-direction: column; align-items: center; }
+  .hero-copy { min-width: auto; width: 100%; text-align: center; }
+  .buttons { align-items: center; }
+  .service-button { width: 100%; }
+  /* Stack hero columns on narrower viewports */
+  .hero-grid { flex-direction: column; gap: 1.25rem; }
+  .hero-right { width: 100%; }
+  .hero-crest { width: 100%; max-width: 420px; }
+  .gallery-item {
+    width: 20rem; /* 320px */
+    height: 15rem; /* 240px */
+  }
+  .arrow {
+    width: 3.125rem; /* 50px */
+    height: 3.125rem;
+    font-size: 1.6em;
+    padding: 0.625rem 0.75rem; /* ~10px 12px */
+  }
+}
+
+@media (max-width: 600px) {
+  /* Mobile phones: use viewport-based sizes so items fit nicely */
+  .gallery-track {
+    gap: 0.75rem; /* 12px */
+    padding: 0 2.5rem; /* 40px */
+  }
+  .gallery-item {
+    width: 80vw; /* almost full width so it feels like a swipe carousel */
+    height: calc(80vw * 0.75); /* keep roughly 4:3 aspect ratio */
+  }
+  .gallery-item img {
+    object-fit: cover; /* better visual on small screens */
+  }
+  .arrow {
+    width: 2.875rem; /* 46px */
+    height: 2.875rem;
+    font-size: 1.4em;
+    padding: 0.5rem 0.625rem; /* ~8px 10px */
+    left: 0.375rem; /* 6px */
+    right: 0.375rem;
+  }
+}
+
+/* Extra small / mobile polish to keep the homepage responsive and usable */
+@media (max-width: 480px) {
+  header {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .logo img {
+    width: 2.5rem; /* make the logo smaller on tiny screens */
+    height: auto;
+  }
+
+  .hero {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .hero-grid {
+    padding: 0 0.5rem;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .hero-left {
+    flex-direction: column;
+    align-items: center; /* center when stacked so copy is centered below the image */
+    gap: 0.75rem;
+  }
+
+  .hero-crest {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 0.5rem;
+    margin: 0 auto; /* center the image when stacked */
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(1.4rem, 6.5vw, 1.9rem);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .hero-copy p {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    text-align: center; /* center paragraph when stacked under image */
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center; /* center CTAs when stacked */
+  }
+
+  .buttons .btn {
+    width: 100%;
+  }
+
+  .hero-right {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .hero-services { gap: 0.5rem; }
+
+  .service-button {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  /* Ensure the nav dropdown still fits nicely */
+  nav ul { right: 8px; left: 8px; }
+}
+
+.arrow img {
+  width: 2.5rem; /* 40px */
+  height: 2.5rem;
+  filter: drop-shadow(0 0 0.3125rem #ff7A00); /* 5px -> 0.3125rem */
+  position: relative;
+}
+
+.phoenix-list {
+  list-style: none;            /* remove default dots */
+  padding-left: 2.2em;         /* room for the icon */
+  margin: 0;
+  font-size: 18px;
+}
+
+.phoenix-list li {
+  position: relative;
+  margin: 0.5em 0;
+  line-height: 1.6em;
+}
+
+/* Put your PNG here (adjust path if needed) */
+.phoenix-list li::before {
+  content: "";
+  position: absolute;
+  left: -1.5em;
+  top: 0.25em;
+  width: 1.5em;                  /* ~16px */
+  height: 1.5em;
+  background: url("General_Sight_Cosmetics/phoenix-icon.svg") no-repeat center center;
+  background-size: contain;    /* scale icon properly */
+  opacity: 0.95;
+}
+
+/* Optional: hover “heat” effect */
+.phoenix-list li:hover::before {
+  filter:
+    drop-shadow(0 0 8px rgba(255, 100, 0, 1))
+    drop-shadow(0 0 12px rgba(255, 60, 0, 0.8))
+    brightness(1.4);
+  opacity: 1;
+}
+
+.phoenix-list-grey {
+  list-style: none;    /* same as orange list to preserve alignment */
+  margin: 0;
+}
+
+.phoenix-list-grey li {
+  position: relative;
+  margin: 0.75em 0;        /* matches current paragraph spacing */
+  line-height: 1.6;
+}
+
+/* grey bullet icon (use the smoky SVG you saved earlier) */
+.phoenix-list-grey li::before {
+  content: "";
+  position: absolute;
+  left: -1.5em;
+  top: 0.25em;
+  width: 1.4em;
+  height: 1.4em;
+  background: url("General_Sight_Cosmetics/phoenix-bullet-grey.svg") no-repeat center center;
+  background-size: contain;
+  opacity: 0.9;            /* slightly softer look */
+  filter: drop-shadow(0 0 2px rgba(120,120,120,0.4));
+}
+
+/* optional hover effect (subtle ember glow) */
+.phoenix-list-grey li:hover::before {
+    filter:
+    drop-shadow(0 0 6px rgba(160, 160, 160, 0.9))   /* inner smoky glow */
+    drop-shadow(0 0 12px rgba(100, 100, 100, 0.8))  /* outer grey haze */
+    brightness(1.3);                                /* slight shine effect */
+  opacity: 1;
+}
+
+.inline-photo {
+  max-width: 100%;
+  width: 16rem;          /* reduced to 256px - smaller to prevent text overlap */
+  height: auto;
+  float: right;
+  margin: 0 0 1rem 1.5rem;    /* top margin removed, gives text room below */
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0,0,0,0.4);
+  border: 4px solid transparent;
+  border-image: linear-gradient(to right, #7F1D1D, #B7410E, #FF4500) 1;
+  flex-shrink: 0;        /* prevent image from shrinking if needed */
+}
+
+/* On tablets: keep size consistent */
+@media (max-width: 900px) {
+  .inline-photo {
+    width: 15rem;        /* ~240px - tighter fit for tablet */
+  }
+}
+
+/* On mobile: stack images, don't float */
+@media (max-width: 600px) {
+  .inline-photo {
+    float: none;
+    width: 100%;
+    max-width: 14rem;    /* max 224px on mobile */
+    margin: 1rem auto;   /* center and separate from text */
+    display: block;
+  }
+}
+
+
+@keyframes fly {
+  0% {
+    transform: translate(0, 0) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* SECTION & HEADERS */
+.contact-section {
+  color: #e6e6e6;
+  padding: 3.75rem 1.25rem; /* 60px 20px */
+  max-width: 75rem; /* 1200px */
+  margin: auto;
+}
+
+.contact-section h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+/* LAYOUT: TOP ROW (Our Info + Connect With Us) */
+.contact-info-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  padding: auto;
+  justify-content: center;
+  Margin: auto;
+  margin-bottom: 4rem; /* space before the form row */
+  border-radius: 80%;
+  max-width: 1200px;
+  width: 100%;
+  
+  
+}
+
+/* CARD STYLES (shared) */
+.contact-info,
+.contact-social,
+.contact-form {
+  background: rgba(20, 20, 20, 0.8);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 77, 0, 0.15);
+  
+}
+
+/* SIDE-BY-SIDE SIZING */
+.contact-info,
+.contact-social {
+  flex: 1 1 45%;
+}
+
+/* Let social card balance nicely even if text is shorter/longer */
+.contact-social {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* remove any top margin when used in the side-by-side row */
+  margin-top: 0;
+}
+
+.contact-info h2,
+.contact-form h2,
+.contact-social h2 {
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+
+/* SOCIAL LINKS */
+.contact-social p {
+  color: #ccc;
+  margin-bottom: 15px;
+  font-family: 'Times New Roman', sans-serif;
+}
+
+/* OUR INFO PARAGRAPHS */
+.contact-info p {
+  color: #ccc;
+  margin-bottom: 15px;
+  font-family: 'Times New Roman', sans-serif;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1a1a1a;
+  color: #e6e6e6;
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.social-links a:hover {
+  box-shadow: 0 0 12px #ff4d00;
+  transform: translateY(-2px);
+}
+
+.social-links img {
+  width: 1.375rem;
+  height: 1.375rem;
+  filter: brightness(0) invert(1);
+}
+
+/* LAYOUT: BOTTOM ROW (Form) */
+.contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+/* Keep form at ~half width on desktop; full width on mobile */
+.contact-form {
+  flex: 1 1 100%;
+}
+
+/* FORM ELEMENTS */
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form h4 {
+  font-family: 'Times New Roman', Times, serif;
+  text-decoration: underline;
+  font-size: .8rem;
+  margin-bottom: 1.3rem;
+  color: var(--accent);
+}
+
+.contact-form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+  background: #1a1a1a;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.9375rem;
+  font-size: 1rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #ff4d00;
+  outline: none;
+  box-shadow: 0 0 8px #ff4d00;
+}
+
+.contact-form button {
+  background: #ff4d00;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.contact-form button:hover {
+  box-shadow: 0 0 15px #ff4d00;
+  transform: translateY(-2px);
+  color: #3d17ca;
+}
+
+/* RESPONSIVE */
+@media (max-width: 800px) {
+  .contact-info-wrapper {
+    flex-direction: column;
+  }
+  .contact-container {
+    flex-direction: column;
+  }
+  .contact-info,
+  .contact-social,
+  .contact-form {
+    flex: 1 1 100%;
+  }
+}
+
+/* Temporary highlight applied when navigating to a section via service buttons */
+.section-highlight {
+  animation: highlightPulse 3s ease forwards;
+}
+
+@keyframes highlightPulse {
+  0% {
+    box-shadow: 0 0 0 8px rgba(255, 77, 0, 0.85);
+    background-color: rgba(255, 77, 0, 0.14);
+  }
+  60% {
+    box-shadow: 0 0 0 3px rgba(255, 77, 0, 0.35);
+    background-color: rgba(255, 77, 0, 0.07);
+  }
+  100% {
+    box-shadow: none;
+    background-color: transparent;
+  }
+}
+
+/* Slight accessibility improvement: make animated highlights reduce motion when user prefers reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .section-highlight { animation: none; background-color: rgba(255, 77, 0, 0.07); }
+  /* Remove motion-heavy hover effects for users who prefer reduced motion */
+  .btn,
+  .service-button,
+  .arrow,
+  .social-links a,
+  .contact-form button {
+    transition: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Sticky footer: ensure footer sits at the bottom of the viewport on short pages.
+   Use a column flex layout on the body and make the main content area grow. If pages
+   don't use a <main> element, target common content containers and the .hero section. */
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 5rem;
+}
+body > main,
+body > .site-content,
+body > .content,
+body > .page-content,
+body > .hero {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+}
+

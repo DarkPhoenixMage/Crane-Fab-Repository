@@ -1,0 +1,27 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 24"
+  width="24"
+  height="24"
+  aria-label="eBay Icon"
+>
+  <!-- e -->
+  <text x="0" y="17" font-size="18" font-family="Arial" font-weight="bold" fill="#E53238">
+    e
+  </text>
+
+  <!-- b -->
+  <text x="13" y="17" font-size="18" font-family="Arial" font-weight="bold" fill="#0064D2">
+    b
+  </text>
+
+  <!-- a -->
+  <text x="27" y="17" font-size="18" font-family="Arial" font-weight="bold" fill="#F5AF02">
+    a
+  </text>
+
+  <!-- y -->
+  <text x="41" y="17" font-size="18" font-family="Arial" font-weight="bold" fill="#86B817">
+    y
+  </text>
+</svg>

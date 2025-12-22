@@ -1,0 +1,43 @@
+<svg width="100%" height="100%" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:fixed;top:0;left:0;z-index:-1;">
+  <defs>
+    <linearGradient id="blueCreak" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="silverCreak" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c0c0c0" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </linearGradient>
+    <filter id="pulse">
+      <feTurbulence type="turbulence" baseFrequency="0.003" numOctaves="2" result="turb" />
+      <feDisplacementMap in="SourceGraphic" in2="turb" scale="15" />
+      <animate attributeName="scale" values="15;25;15" dur="5s" repeatCount="indefinite" />
+    </filter>
+  </defs>
+
+  <!-- Blue creaks -->
+  <g stroke="url(#blueCreak)" stroke-width="1.5" fill="none" filter="url(#pulse)">
+    <path d="M100,200 C300,400 500,100 700,300" />
+    <path d="M150,500 C350,700 550,300 750,500" />
+    <path d="M200,800 C400,1000 600,600 800,800" />
+    <path d="M850,200 C1050,400 1250,100 1450,300" />
+    <path d="M900,500 C1100,700 1300,300 1500,500" />
+    <path d="M950,800 C1150,1000 1350,600 1550,800" />
+    <path d="M1600,200 C1800,400 2000,100 2200,300" />
+    <path d="M1650,500 C1850,700 2050,300 2250,500" />
+    <path d="M1700,800 C1900,1000 2100,600 2300,800" />
+  </g>
+
+  <!-- Silver creaks -->
+  <g stroke="url(#silverCreak)" stroke-width="1.2" fill="none" filter="url(#pulse)">
+    <path d="M250,250 C450,450 650,150 850,350" />
+    <path d="M300,550 C500,750 700,350 900,550" />
+    <path d="M350,850 C550,1050 750,650 950,850" />
+    <path d="M1000,250 C1200,450 1400,150 1600,350" />
+    <path d="M1050,550 C1250,750 1450,350 1650,550" />
+    <path d="M1100,850 C1300,1050 1500,650 1700,850" />
+    <path d="M1750,250 C1950,450 2150,150 2350,350" />
+    <path d="M1800,550 C2000,750 2200,350 2400,550" />
+    <path d="M1850,850 C2050,1050 2250,650 2450,850" />
+  </g>
+</svg>

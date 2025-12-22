@@ -1,0 +1,43 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  width="24"
+  height="24"
+  aria-label="Instagram Icon"
+>
+  <!-- Rounded square -->
+  <rect
+    x="2"
+    y="2"
+    width="20"
+    height="20"
+    rx="5"
+    fill="#ffffff"
+  />
+
+  <!-- Outer camera circle -->
+  <circle
+    cx="12"
+    cy="12"
+    r="5"
+    stroke="#000"
+    stroke-width="2"
+    fill="none"
+  />
+
+  <!-- Inner camera lens -->
+  <circle
+    cx="12"
+    cy="12"
+    r="2"
+    fill="#000"
+  />
+
+  <!-- Flash dot -->
+  <circle
+    cx="17"
+    cy="7"
+    r="1"
+    fill="#000"
+  />
+</svg>
