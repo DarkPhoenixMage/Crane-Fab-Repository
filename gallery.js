@@ -8,6 +8,28 @@ document.addEventListener('DOMContentLoaded', function () {
     const rightArrow = wrapper.querySelector('.arrow.right');
     if (!track) return;
 
+    // Add click functionality to gallery items for mobile description overlay
+    const galleryItems = wrapper.querySelectorAll('.gallery-item');
+    galleryItems.forEach((item) => {
+      item.addEventListener('click', function (e) {
+        // Don't trigger if clicking the arrow buttons
+        if (e.target.closest('.arrow')) return;
+        
+        // Toggle the 'active' class to show/hide description
+        item.classList.toggle('active');
+      });
+    });
+
+    // Close description when clicking elsewhere on the page
+    document.addEventListener('click', function (e) {
+      // Close all active items if click is outside gallery
+      if (!wrapper.contains(e.target)) {
+        galleryItems.forEach((item) => {
+          item.classList.remove('active');
+        });
+      }
+    });
+
     // Compute a precise scroll step: prefer item offsetWidth + gap. We'll use this
     // step to align the track so each click advances exactly one card.
     const getScrollStep = () => {
@@ -97,5 +119,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initial state
     updateArrows();
+
+    // Recompute arrow visibility when images finish loading (prevents initial hide
+    // while images are still loading and the track is not yet scrollable).
+    const imgs = track.querySelectorAll('img');
+    imgs.forEach(img => {
+      if (!img.complete) img.addEventListener('load', updateArrows);
+    });
+
+    // Also recalc once when the full page finishes loading (covers lazy-loaded assets)
+    window.addEventListener('load', updateArrows);
+
+    // Slight delayed recalculation to cover edge cases where layout changes after paint
+    setTimeout(updateArrows, 250);
   });
 });

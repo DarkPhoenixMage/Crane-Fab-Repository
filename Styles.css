@@ -620,6 +620,17 @@ header.nav-open nav ul {
   font-family: 'BlackChancery', sans-serif;
 }
 
+.gallery h5 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  font-style: "Times New Roman", serif;
+  opacity: 0.9;
+}
+
 /* 🖼️ Gallery Layout */
 .gallery-wrapper {
   position: relative;
@@ -637,18 +648,25 @@ header.nav-open nav ul {
   gap: var(--gap);
   -webkit-overflow-scrolling: touch;
   /* Hide native horizontal scrollbar but keep scrolling functional */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: auto; /* show scrollbar in IE/Edge */
+  scrollbar-width: thin; /* Firefox: show thin scrollbar */
   /* Give room for circular arrows so items don't sit behind them */
   padding: 0 4rem;
   box-sizing: content-box; /* keep padding outside the flex children */
   overscroll-behavior-x: contain; /* prevent scroll chaining on mobile */
 }
 
-/* WebKit browsers (Chrome, Safari, newer Edge) - hide horizontal scrollbar */
-.gallery-track::-webkit-scrollbar {
-  height: 0; /* hide horizontal scrollbar */
-  background: transparent;
+
+.gallery-track::-webkit-scrollbar-thumb:hover {
+  background: transparent
+
+}
+
+/* Firefox support */
+.gallery-track,
+body {
+  scrollbar-color: orange transparent; /* thumb and track colors */
+  scrollbar-width: none;
 }
 
 /* 📷 Image Styling */
@@ -670,7 +688,7 @@ header.nav-open nav ul {
   position: relative;
   width: clamp(var(--card-min), 28vw, var(--card-max));
   height: auto; /* let the image determine the height */
-  max-height: 60vh; /* prevent excessively tall items on large screens */
+  max-height: 50vh; /* prevent excessively tall items on large screens */
   overflow: hidden;
   border-radius: 0.5rem; /* 8px */
   cursor: pointer;
@@ -709,6 +727,13 @@ header.nav-open nav ul {
   box-shadow: 0 0 15px 0.3125rem #ff7A00; /* 5px -> 0.3125rem */
 }
 
+/* Show description when item is clicked (active state for mobile) */
+.gallery-item.active .description {
+  opacity: 1;
+  border: 0.125rem solid #ff7A00;
+  box-shadow: 0 0 15px 0.3125rem #ff7A00;
+}
+
 
 /* ➡️ Navigation Arrows */
 .arrow {
@@ -726,9 +751,10 @@ header.nav-open nav ul {
   font-family: 'BlackChancery', serif;
   box-shadow: 0 0 0.625rem #FF7A00; /* 10px -> 0.625rem */
   cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
+  transition: box-shadow 0.3s ease, opacity 0.3s ease;
+  position: absolute;
   top: 50%;
+  transform: translateY(-50%);
   z-index: 10;
 }
 
@@ -749,7 +775,6 @@ header.nav-open nav ul {
    This keeps behavior consistent across .btn, .service-button, arrows, social links and form buttons. */
 .btn:hover,
 .service-button:hover,
-.arrow:hover,
 .social-links a:hover,
 .contact-form button:hover {
   transform: translateY(-3px) scale(1.03);
@@ -802,7 +827,7 @@ header.nav-open nav ul {
   .gallery-item {
     width: 22.5rem; /* 360px */
     height: auto;
-    max-height: 50vh;
+    max-height: 45vh;
   }
   .arrow {
     width: 3.375rem; /* 54px */
@@ -833,7 +858,15 @@ header.nav-open nav ul {
   .gallery-item {
     width: 20rem; /* 320px */
     height: auto;
-    max-height: 45vh;
+    max-height: 40vh;
+  }
+  .gallery-item .description {
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+  .gallery-item .description ul {
+    max-height: 100%;
+    overflow-y: auto;
   }
   .arrow {
     width: 3.125rem; /* 50px */
@@ -845,18 +878,24 @@ header.nav-open nav ul {
 
 @media (max-width: 600px) {
   /* Mobile phones: use viewport-based sizes so items fit nicely and avoid image cropping */
+  .gallery {
+    padding: 1.5rem 0; /* Reduce padding to give more space for gallery */
+  }
+  .gallery-wrapper {
+    padding: 0 0.5rem; /* Add padding to wrapper for arrows */
+  }
   .gallery-track {
     gap: 0.5rem; /* 8px */
-    padding: 0 0.75rem; /* small side padding so images can be centered without being clipped */
+    padding: 0 3.5rem; /* Make room for arrows on left and right */
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
   }
   .gallery-item {
-    flex: 0 0 calc(100% - 1.5rem); /* allow for track padding so item fits fully */
-    width: calc(100% - 1.5rem);
+    flex: 0 0 calc(100vw - 4rem); /* Full viewport width minus wrapper padding and small buffer */
+    width: calc(100vw - 4rem);
     height: auto; /* let image determine the height */
-    max-height: 70vh; /* prevent extremely tall items on small screens */
-    overflow: visible; /* show entire image */
+    max-height: 45vh; /* Reduced to fit better on mobile */
+    overflow: hidden; /* hide overflow in description */
     border-radius: 0.5rem;
     scroll-snap-align: center;
     scroll-snap-stop: always;
@@ -868,14 +907,35 @@ header.nav-open nav ul {
     object-fit: contain; /* ensure whole image is visible without cropping */
     display: block;
   }
+  .gallery-item .description {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+  .gallery-item .description ul {
+    list-style: none;
+    max-height: calc(45vh - 1.5rem);
+    overflow-y: auto;
+    font-size: 0.75rem;
+  }
+  .gallery-item .description li {
+    margin: 0.25rem 0;
+  }
   .gallery-track::-webkit-scrollbar { height: 6px; }
   .arrow {
-    width: 2.5rem; /* 40px */
-    height: 2.5rem;
-    font-size: 1.2em;
-    padding: 0.4rem 0.5rem;
-    left: 0.375rem; /* 6px */
-    right: 0.375rem;
+    width: 2.75rem; /* 44px - larger for easier tapping */
+    height: 2.75rem;
+    font-size: 1.3em;
+    padding: 0.5rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+  }
+  .arrow.left {
+    left: 0.25rem; /* 4px from edge */
+  }
+  .arrow.right {
+    right: 0.25rem; /* 4px from edge */
   }
 }
 
@@ -951,6 +1011,80 @@ header.nav-open nav ul {
 
   /* Ensure the nav dropdown still fits nicely */
   nav ul { right: 8px; left: 8px; }
+
+  /* Gallery adjustments for tiny screens */
+  .gallery {
+    padding: 1rem 0;
+  }
+  .gallery h1,
+  .gallery h2 {
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    margin-bottom: 0.75rem;
+  }
+  .gallery-wrapper {
+    padding: 0 0.25rem;
+  }
+  .gallery-track {
+    padding: 0 3.5rem; /* Maintain space for arrows */
+  }
+  .gallery-item {
+    flex: 0 0 calc(100vw - 4rem);
+    width: calc(100vw - 4rem);
+    max-height: 42vh;
+  }
+  .gallery-item .description {
+    padding: 0.6rem;
+    font-size: 0.75rem;
+  }
+  .gallery-item .description ul {
+    max-height: calc(42vh - 1.2rem);
+    font-size: 0.7rem;
+  }
+  .arrow {
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.3em;
+  }
+
+  /* Contact page mobile polish to ensure vertical-only scrolling */
+  .contact-section {
+    padding: 0.9rem 0.6rem;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .contact-info,
+  .contact-social {
+    margin: 0 0 0.6rem 0; /* stack cleanly without horizontal overflow */
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+  }
+
+  .contact-form {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+  }
+
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form select {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.95rem;
+  }
+
+  .social-links {
+    gap: 8px;
+    padding: 0;
+  }
+
+  .social-links a { padding: 8px 10px; }
+  .social-links img { width: 1.125rem; height: 1.125rem; }
+
+  .contact-form button { width: 100%; display: block; }
 }
 
 .arrow img {
@@ -1091,16 +1225,13 @@ header.nav-open nav ul {
 .contact-info-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 4rem;
-  padding: auto;
+  gap: 1.5rem;
+  padding: 0;
   justify-content: center;
-  Margin: auto;
-  margin-bottom: 4rem; /* space before the form row */
-  border-radius: 80%;
+  margin: 0 auto 2.5rem; /* center the group and give bottom spacing */
   max-width: 1200px;
   width: 100%;
-  
-  
+  align-items: flex-start;
 }
 
 /* CARD STYLES (shared) */
@@ -1114,10 +1245,13 @@ header.nav-open nav ul {
   
 }
 
-/* SIDE-BY-SIDE SIZING */
+/* SIDE-BY-SIDE SIZING: make each card an independent centered column with a max width */
 .contact-info,
 .contact-social {
-  flex: 1 1 45%;
+  flex: 0 1 420px; /* don't force equal growth; allow cards to size independently */
+  max-width: 520px;
+  width: 100%;
+  margin: 0.5rem; /* small gutter so cards visually separate when wrapping */
 }
 
 /* Let social card balance nicely even if text is shorter/longer */
@@ -1177,7 +1311,6 @@ header.nav-open nav ul {
 .social-links img {
   width: 1.375rem;
   height: 1.375rem;
-  filter: brightness(0) invert(1);
 }
 
 /* LAYOUT: BOTTOM ROW (Form) */
@@ -1251,6 +1384,8 @@ header.nav-open nav ul {
 @media (max-width: 800px) {
   .contact-info-wrapper {
     flex-direction: column;
+    gap: 0.75rem;
+    padding: 0 0.5rem;
   }
   .contact-container {
     flex-direction: column;
@@ -1259,6 +1394,59 @@ header.nav-open nav ul {
   .contact-social,
   .contact-form {
     flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 1rem 0; /* remove side margins that can cause overflow */
+    padding: 16px; /* slightly reduced padding on smaller screens */
+    box-sizing: border-box;
+  }
+}
+
+/* Large screens: two-column layout with stacked info cards on the left
+   and the contact form fixed on the right. Collapses to single column on small screens. */
+@media (min-width: 900px) {
+  .contact-section {
+    display: grid;
+    grid-template-columns: minmax(320px, 1fr) 420px;
+    gap: 2rem;
+    align-items: start;
+    max-width: 1200px;
+  }
+
+  /* Stack the two info cards vertically in the left column */
+  .contact-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  /* Make the left cards visually uniform: same spacing, vertical layout, and min-height */
+  .contact-info,
+  .contact-social {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 25px; /* restore original padding */
+    min-height: 260px; /* explicit uniform card height */
+    box-sizing: border-box;
+  }
+
+  /* Ensure the form column sits at the right and doesn't stretch too wide */
+  .contact-container {
+    margin: 0;
+    display: block;
+    width: 100%;
+  }
+
+  .contact-form {
+    background: rgba(20, 20, 20, 0.9);
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45), 0 0 20px rgba(255,77,0,0.15);
   }
 }
 
@@ -1319,5 +1507,11 @@ body > .hero {
 
 footer {
   flex-shrink: 0;
+}
+
+/* Prevent page-level horizontal scrolling on small devices while allowing inner elements (like carousels)
+   to remain scrollable. This avoids accidental page-wide horizontal scroll caused by overflow. */
+html, body {
+  overflow-x: hidden;
 }
 

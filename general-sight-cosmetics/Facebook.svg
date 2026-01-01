@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="48"
+    height="48"
+    viewBox="0 0 48 48"
+    role="img"
+    aria-label="Facebook icon"
+>
+  <!-- Background circle -->
+  <circle cx="24" cy="24" r="24" fill="#1877F2" />
+
+  <!-- "f" logo -->
+  <path
+  fill="#FFFFFF"
+  transform="translate(0.5,0)"
+  d="M26.8 14H25c-2.09 0-3.5 1.41-3.5 3.6v2.4H19v3.8h2.5V34h4.1V23.8h2.9l0.6-3.8h-3.5v-2.1
+     c0-0.7 0.35-1.2 1.25-1.2h3V14h-2.95z"
+/>
+
+</svg>
