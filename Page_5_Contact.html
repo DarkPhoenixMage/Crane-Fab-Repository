@@ -39,7 +39,7 @@
         <p><strong>Mailing Address:</strong> P.O. Box 113 Elko, NV 89803</p>
         <p><strong>Physical Address:</strong> 9003 11th Street, Elko, NV 89801</p>
         <p><strong>Phone:</strong> (775) 385-8212</p>
-        <p><strong>Email:</strong> <a href="mailto:cranefab67@gmail.com">cranefab67@gmail.com</a></p>
+        <p><strong>Email:</strong> <a href="mailto:cjcrane@cranefab.com">cjcrane@cranefab.com</a></p>
         <p><strong>Hours:</strong> Mon–Fri: 8am – 5pm Pacific Time Zone (PT)</p>
       </div>
 
@@ -68,7 +68,7 @@
       <div class="contact-form">
         <h2>Send a Message</h2>
         <h4>We usually respond within 1-2 business day</h4>
-        <form id="demo-form" action="#" method="post" enctype="multipart/form-data">
+        <form id="demo-form">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" required>
 
@@ -81,28 +81,61 @@
           <label for="message">Message</label>
           <textarea id="message" name="message" rows="5" required></textarea>
 
-          <label for="file">Attach a file:</label>
-          <input type="file" id="file" name="file" />
+          <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 1rem;">If you would like to send any files, please reach out directly to our email: <a href="mailto:cjcrane@cranefab.com" style="color: #ff7A00; text-decoration: underline;">cjcrane@cranefab.com</a></p>
 
-          <button class="g-recaptcha" 
-            data-sitekey="reCAPTCHA_site_key" 
-            data-callback='onSubmit' 
-            data-action='submit'>Submit</button>
+          <button id="submit-btn" type="submit">Submit</button>
         </form>
       </div>
     </div>
   </main>
- <script src="https://www.google.com/recaptcha/api.js"></script>
- <script>
-   function onSubmit(token) {
-     document.getElementById("demo-form").submit();
-   }
- </script>
-  <footer>
-    <div class="footer-cta">
-    </div>
-    © 2025 Crane Fab. All rights reserved.
-  </footer>
+  <!-- Notification element (shown after submit) -->
+  <div id="email-notice" aria-live="polite" role="status" style="display:none"></div>
+
+  <script>
+(function(){
+  const form = document.getElementById('demo-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const notice = document.getElementById('email-notice');
+
+  function showNotice(message, success){
+    notice.textContent = message;
+    notice.classList.remove('success','error');
+    notice.classList.add(success ? 'success' : 'error');
+    notice.style.display = 'block';
+    notice.style.opacity = '1';
+    setTimeout(() => {
+      notice.style.opacity = '0';
+      setTimeout(() => notice.style.display = 'none', 300);
+    }, 5000);
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    submitBtn.disabled = true;
+
+    try {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const projectType = document.getElementById('project-type').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!name || !email || !projectType || !message) {
+        showNotice('Error: Please fill in all fields.', false);
+        submitBtn.disabled = false;
+        return;
+      }
+
+      showNotice('Thank you for your message! We will review it and get back to you soon.', true);
+      form.reset();
+    } catch (err) {
+      showNotice('Error: Failed to process your message. Please try again.', false);
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+})();
+</script>
+
   <script src="nav.js"></script>
   <script src="image-fade.js"></script>
 </body>
