@@ -37,6 +37,27 @@
   font-family: 'BlackChancery', serif;
 }
 
+.project-card h2.status-just-started::before {
+  content: "●";
+  color: red;
+  margin-right: 0.5rem;
+  font-size: 1.2em;
+}
+
+.project-card h2.status-in-progress::before {
+  content: "●";
+  color: yellow;
+  margin-right: 0.5rem;
+  font-size: 1.2em;
+}
+
+.project-card h2.status-completed::before {
+  content: "●";
+  color: green;
+  margin-right: 0.5rem;
+  font-size: 1.2em;
+}
+
 .project-card p {
   margin: 0 1rem 1rem;
   font-family: "Times New Roman", serif;
