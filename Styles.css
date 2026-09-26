@@ -646,8 +646,8 @@ header.nav-open nav ul {
   background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('Gallery_images/1-gates/love-hope-gate.jpg');
 }
 
-.tile-wood {
-  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('gallery_images/2-Metal-Works/horse-shoe-bench.jpg');
+.tile-metal-work {
+  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('Gallery_images/2-Metal-Works/horse-shoe-bench.jpg');
 }
 
 .tile-parts {
