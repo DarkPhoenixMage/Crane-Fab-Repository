@@ -40,7 +40,7 @@ event_id: 'eventId0001'
   <link rel="icon" type="image/x-icon" href="general-sight-cosmetics/favicon.ico" />
 
 </head>
-<body>
+<body class="home-page">
   <header>
     <div class="logo">  <!--/* Need to work on the logo rounding */-->
       <li><a href="Page_1_Home.html"><img src="general-sight-cosmetics/Company-inital.png" alt="Crane Fab Crest" width="60" height="60" loading="lazy" class="fade-in" /></a></li>
@@ -51,16 +51,18 @@ event_id: 'eventId0001'
         <li><a href="Page_1_Home.html">Home</a></li>
         <li><a href="Page_2_About.html">About</a></li>
         <li><a href="Page_3_Services.html">Services</a></li>
-        <li><a href="Page_4_Gallery.html">Gallery</a></li>
         <li class="nav-parent">
-          <a href="Page_4.5_Project.html">Projects</a>
-          <button class="nav-caret" aria-label="Toggle Projects submenu" aria-expanded="false">▼</button>
-          <ul class="nav-submenu">
-            <li><a href="Project_1.html">Project One</a></li>
-            <li><a href="Project_2.html">Project Two</a></li>
-            <li><a href="Project_3.html">Project Three</a></li>
+          <button class="nav-gallery-toggle" type="button" aria-expanded="false" aria-controls="gallery-submenu">
+            Gallery <span class="nav-gallery-indicator" aria-hidden="true">▼</span>
+          </button>
+          <ul id="gallery-submenu" class="nav-submenu">
+            <li><a href="Page_4.1_Gates.html">Gates</a></li>
+            <li><a href="Page_4.2_Metal_Work.html">Metal Work</a></li>
+            <li><a href="Page_4.3_Vehicle_Projects.html">Vehicle Projects</a></li>
+            <li><a href="Page_4.4_Wood_Work.html">Wood Work</a></li>
           </ul>
         </li>
+        <li><a href="Page_4_Merchandise.html">Merchandise</a></li>
         <li><a href="Page_5_Contact.html">Contact</a></li>
       </ul>
     </nav>
@@ -69,77 +71,77 @@ event_id: 'eventId0001'
 
   <section class="hero">
     <div class="hero-grid">
-      <div class="hero-left">
-  <img class="hero-crest hero-spotlight fade-in" src="general-sight-cosmetics/family-crest.png" alt="Crane Fab Crest" width="400" height="500" />
-        <div class="hero-copy">
-          <p>Family-built and passion-driven, Crane Fab transforms ideas into handcrafted designs that balance power, beauty, and purpose — where creativity meets craft.</p>
-          <div class="hero-cta-group">
-            <div class="buttons">
-              <a class="btn btn-orange" href="Page_4_Gallery.html">View Our Work</a>
-              <a class="btn btn-white" href="Page_4.5_Project.html">See Our Projects</a>
-            </div>
+      <img class="hero-crest hero-spotlight fade-in" src="general-sight-cosmetics/family-crest.png" alt="Crane Fab Crest" width="400" height="500" />
+    </div>
 
-            <!-- Request a Quote CTA shown below the primary hero actions -->
-            <div class="hero-bottom-cta">
-              <a class="btn btn-orange" href="Page_5_Contact.html">Request a Quote</a>
-            </div>
-          </div>
-        </div>
+    <div class="services-tiles" aria-label="Service highlights">
+      <a class="service-tile tile-metal" href="Page_4.1_Gates.html">
+        <span class="tile-content">
+          <span class="tile-title">Gates</span>
+          <span class="tile-btn">Learn More</span>
+        </span>
+      </a>
+      <a class="service-tile tile-wood" href="Page_4.2_Metal_Work.html">
+        <span class="tile-content">
+          <span class="tile-title">Metal Work</span>
+          <span class="tile-btn">Learn More</span>
+        </span>
+      </a>
+
+      <div class="hero-text-box tile-span">
+        <p>Crane Fab is built on honest work. We hand‑forge gates, shape custom metal ornaments, restore classic automotive parts, and blend wood and steel into new creations — all driven by passion, long days in the shop, and the satisfaction of building something real.</p>
       </div>
 
-      <aside class="hero-right" aria-label="Quick links to services">
-        <h3>Our Services</h3>
-        <nav class="hero-services">
-          <a class="service-button" href="Page_3_Services.html#custom-metal">Custom Metal Fabrication</a>
-          <a class="service-button" href="Page_3_Services.html#metal-wood">Metal + Wood Integration</a>
-          <a class="service-button" href="Page_3_Services.html#classic-parts">Classic Parts Inventory</a>
-          <a class="service-button" href="Page_3_Services.html#commercial-projects">Commercial Projects</a>
-          <a class="service-button" href="Page_3_Services.html#custom-projects">Custom Projects</a>
-        </nav>
-      </aside>
+      <a class="service-tile tile-parts" href="Page_4.3_Vehicle_Projects.html">
+        <span class="tile-content">
+          <span class="tile-title">Vehicle Projects</span>
+          <span class="tile-btn">Learn More</span>
+        </span>
+      </a>
+      <a class="service-tile tile-projects" href="Page_4.4_Wood_Work.html">
+        <span class="tile-content">
+          <span class="tile-title">Wood Work</span>
+          <span class="tile-btn">Learn More</span>
+        </span>
+      </a>
     </div>
   </section>
 
   <footer>
-    © 2025 Crane Fab. All rights reserved.
+    <div class="footer-cta">
+      <a href="Page_5_Contact.html">Request a Quote</a>
+    </div>
+    <p>&copy; 2025 Crane Fab. All rights reserved.</p>
   </footer>
 
   <script>
   function createSpark() {
-  const spark = document.createElement('div');
-  spark.classList.add('spark');
+    const spark = document.createElement('div');
+    spark.classList.add('spark');
 
-  // Random start position near bottom
-  spark.style.left = Math.random() * window.innerWidth + 'px';
-  spark.style.top = window.innerHeight - 50 + 'px';
+    spark.style.left = Math.random() * window.innerWidth + 'px';
+    spark.style.top = window.innerHeight - 50 + 'px';
 
-  // Random direction
-  const angle = Math.random() * 360;
-  const distance = Math.random() * 800 + 400;
-  const x = Math.cos(angle * Math.PI / 180) * distance;
-  const y = -Math.abs(Math.sin(angle * Math.PI / 180) * distance); // upward only
+    const angle = Math.random() * 360;
+    const distance = Math.random() * 800 + 400;
+    const x = Math.cos(angle * Math.PI / 180) * distance;
+    const y = -Math.abs(Math.sin(angle * Math.PI / 180) * distance);
 
-  // Apply custom direction to CSS animation
-  spark.style.setProperty('--x', `${x}px`);
-  spark.style.setProperty('--y', `${y}px`);
+    spark.style.setProperty('--x', `${x}px`);
+    spark.style.setProperty('--y', `${y}px`);
+    spark.style.animationDuration = '8s';
 
-  // Set animation duration to 8 seconds
-  spark.style.animationDuration = '8s';
+    document.querySelector('.welding-sparks').appendChild(spark);
 
-  // Add spark to container
-  document.querySelector('.welding-sparks').appendChild(spark);
+    setTimeout(() => {
+      spark.remove();
+    }, 8000);
+  }
 
-  // Remove spark after animation ends
-  setTimeout(() => {
-    spark.remove();
-  }, 8000);
-}
-
-// Create sparks in bursts
-setInterval(() => {
-  for (let i = 0; i < 3; i++) createSpark();
-}, 300);
-</script>
+  setInterval(() => {
+    for (let i = 0; i < 3; i++) createSpark();
+  }, 300);
+  </script>
 
 <script src="nav.js"></script>
 <script src="image-fade.js"></script>
