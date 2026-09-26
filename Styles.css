@@ -711,6 +711,18 @@ header.nav-open nav ul {
       .services-tiles {
         grid-template-columns: 1fr;
       }
+
+      .hero-text-box {
+        order: -1;
+      }
+
+      .tile-span {
+        grid-column: 1;
+      }
+
+      .service-tile {
+        min-height: clamp(220px, 32vh, 300px);
+      }
     }
 
     @media (max-width: 600px) {
@@ -1112,6 +1124,20 @@ body {
 } 
 
 @media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: auto;
+  }
+
+  .hero-grid {
+    width: 100%;
+  }
+
+  .services-tiles {
+    width: 100%;
+  }
+
   /* Tablet */
   .gallery-track {
     gap: 1rem; /* 16px */
