@@ -1,40 +1,123 @@
-// Fade-in effect for images as they load, with a centered loader element
-document.querySelectorAll("img.fade-in").forEach(img => {
-  // Create loader element and append after the image
-  const loader = document.createElement('div');
-  loader.className = 'image-loader';
-  // Start hidden by default; we'll remove hidden when we need to show it
-  loader.setAttribute('aria-hidden', 'true');
+(() => {
+  const loaders = new WeakMap();
+  const sources = new WeakMap();
+  const pendingImages = new Set();
+  const trackedImages = new WeakSet();
 
-  // Ensure the parent is positioned (gallery items already are). Insert after the image
-  if (img.parentNode) {
-    img.parentNode.insertBefore(loader, img.nextSibling);
+  function positionLoader(img) {
+    const loader = loaders.get(img);
+    const parent = img.parentElement;
+    if (!loader || !parent) return;
+
+    if (getComputedStyle(parent).position === 'static') {
+      parent.style.position = 'relative';
+    }
+
+    if (loader.parentElement !== parent) {
+      loader.remove();
+      parent.insertBefore(loader, img.nextSibling);
+    }
+
+    const imageRect = img.getBoundingClientRect();
+    const parentRect = parent.getBoundingClientRect();
+    loader.style.left = `${imageRect.left - parentRect.left - parent.clientLeft + parent.scrollLeft + imageRect.width / 2}px`;
+    loader.style.top = `${imageRect.top - parentRect.top - parent.clientTop + parent.scrollTop + imageRect.height / 2}px`;
   }
 
-  function showLoaded() {
-    // mark image loaded and hide loader
+  function finishImage(img) {
     img.classList.add('loaded');
-    if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+    pendingImages.delete(img);
+    const loader = loaders.get(img);
+    if (loader) loader.remove();
   }
 
-  function showLoader() {
-    if (loader) loader.removeAttribute('hidden');
+  function trackImage(img) {
+    const source = [img.currentSrc, img.getAttribute('src'), img.getAttribute('srcset'), img.getAttribute('sizes')].join('|');
+    if (!img.hasAttribute('src') && !img.hasAttribute('srcset')) return;
+
+    if (!trackedImages.has(img)) {
+      trackedImages.add(img);
+      img.decoding = 'async';
+      img.classList.add('fade-in');
+      img.addEventListener('load', () => finishImage(img));
+      img.addEventListener('error', () => finishImage(img));
+    }
+
+    if (sources.get(img) === source) {
+      if (pendingImages.has(img)) positionLoader(img);
+      return;
+    }
+
+    sources.set(img, source);
+    img.classList.remove('loaded');
+
+    let loader = loaders.get(img);
+    if (!loader || !loader.isConnected) {
+      loader = document.createElement('span');
+      loader.className = 'image-loader';
+      loader.setAttribute('aria-hidden', 'true');
+      loaders.set(img, loader);
+    }
+
+    pendingImages.add(img);
+    positionLoader(img);
+    if (img.complete) finishImage(img);
   }
 
-  // Show loader right away if image not yet complete
-  if (!img.complete) {
-    showLoader();
+  function trackNode(node) {
+    if (!(node instanceof Element)) return;
+    if (node.matches('img')) trackImage(node);
+    node.querySelectorAll('img').forEach(trackImage);
   }
 
-  img.addEventListener('load', showLoaded);
-  img.addEventListener('error', () => {
-    // On error, remove loader and still mark as loaded so it's visible fallback
-    if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
-    img.classList.add('loaded');
-  });
+  function trackTileBackgrounds() {
+    document.querySelectorAll('.service-tile').forEach((tile) => {
+      const background = getComputedStyle(tile).backgroundImage;
+      const match = background.match(/url\((?:"([^"]+)"|'([^']+)'|([^)]*))\)/);
+      if (!match || tile.dataset.backgroundTracked) return;
 
-  // If already cached/loaded, mark immediately and remove loader
-  if (img.complete) {
-    showLoaded();
+      const source = (match[1] || match[2] || match[3]).trim();
+      if (!source) return;
+      tile.dataset.backgroundTracked = 'true';
+
+      const loader = document.createElement('span');
+      loader.className = 'image-loader';
+      loader.setAttribute('aria-hidden', 'true');
+      tile.appendChild(loader);
+
+      const preload = new Image();
+      const clearLoader = () => loader.remove();
+      preload.addEventListener('load', clearLoader, { once: true });
+      preload.addEventListener('error', clearLoader, { once: true });
+      preload.src = source;
+      if (preload.complete) clearLoader();
+    });
   }
-});
+
+  function start() {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes') trackImage(mutation.target);
+        mutation.addedNodes.forEach(trackNode);
+      });
+      trackTileBackgrounds();
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['src', 'srcset', 'sizes'],
+      childList: true,
+      subtree: true
+    });
+
+    document.querySelectorAll('img').forEach(trackImage);
+    trackTileBackgrounds();
+    window.addEventListener('resize', () => pendingImages.forEach(positionLoader));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, { once: true });
+  } else {
+    start();
+  }
+})();
