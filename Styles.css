@@ -1,4 +1,3 @@
- @import url('https://fonts.cdnfonts.com/css/black-chancery');
  * {
       margin: 0;
       padding: 0;
@@ -6,15 +5,36 @@
     }
 
 :root{
-  --space: 1rem; /* 16px */
-  --space-sm: 0.75rem; /* 12px */
-  --space-lg: 1.5rem; /* 24px */
-  --touch: 2.75rem; /* ~44px touch target */
-  --card-max: 30rem; /* 480px */
-  --card-min: 18rem; /* 288px */
-  --gap: 1.25rem; /* 20px */
-  --bg-overlay: rgba(17,17,17,0.98);
   --accent: #ff7A00; /* primary header/accent color */
+}
+
+* {
+  scrollbar-color: var(--accent) #111;
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 0.65rem;
+  height: 0.65rem;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: #111;
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 2px solid #111;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #ff9a33;
+}
+
+*::-webkit-scrollbar-corner {
+  background: #111;
 }
 
 /* Global header color: ensure all h1-h6 use the accent color for consistency */
@@ -46,30 +66,47 @@ html{ font-size: clamp(16px, 1.2vw, 20px); }
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0rem 1rem;
+      padding: 0 1rem;
       background-color: #111;
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       width: 100%;
-      box-sizing: border-box;
-        background-image: url('general-sight-cosmetics/web-background.svg');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
+      background-image: url('general-sight-cosmetics/web-background.svg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
       z-index: 1000;
     }
 
-    .logo {
-    object-fit: cover;
-    width: auto;
-    height: auto;
+    .logo img {
+      width: 3.5rem;
+      height: auto;
     }
 
-.logo img {
-  width: 3.5rem; /* ~56px */
-  height: auto;
+    .tile-projects {
+      background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('Gallery_images/4-Wood_Work/CraneFab_Desk.jpg');
+    }
+
+    .hero img {
+      border: 4px solid transparent;
+      border-image: linear-gradient(to right, #7F1D1D, #B7410E, #FF4500) 1;
+    }
+
+    .hero h1 {
+      font-size: 3.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      margin-bottom: 0.2em;
+      line-height: 1.15;
+      text-indent: 0;
+      font-size: clamp(0.72rem, 1vw, 0.95rem);
+      font-family: 'Black Chancery', serif;
+      color: #ccc;
+      max-width: 24rem;
 }
 
     nav ul {
@@ -445,13 +482,9 @@ header.nav-open nav ul {
   .nav-submenu li a { padding: 8px 12px; font-size: 0.95rem; }
 }
 
-    .hero {
-      text-align: center;
-      padding: 3rem 1rem;
-      background: url('hero-bg.jpg') center/cover no-repeat;
-    }
-/* Center the hero content vertically and keep the grid centered */
 .hero {
+  text-align: center;
+  padding: 3rem 1rem;
   min-height: 78vh;
   display: flex;
   align-items: center;
@@ -542,21 +575,6 @@ header.nav-open nav ul {
   max-width: 1000px;
 }
 
-.services-tiles {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(290px, 1fr));
-  gap: 0;
-}
-
-.hero-left {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  flex-wrap: nowrap;
-  width: min(100%, 980px);
-}
-
 .hero-crest {
   max-width: 360px;
   width: clamp(180px, 34vw, 360px);
@@ -571,9 +589,9 @@ header.nav-open nav ul {
   width: calc(100% - 2rem);
   margin: 0 auto;
   padding: 0;
-  display: grid;
   grid-template-columns: repeat(2, minmax(290px, 1fr));
   gap: 0;
+  display: grid;
 }
 
 .service-tile {
@@ -651,61 +669,8 @@ header.nav-open nav ul {
 }
 
 .tile-parts {
-  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('Gallery_images\\3-Vehicle_Projects\\2001 firebird\\Brothers_cars.jpg');
+  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('Gallery_images/3-Vehicle_Projects/2001 firebird/Brothers_cars.jpg');
 }
-
-.tile-projects {
-  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('Gallery_images/4-Wood_Work/CraneFab_Desk.jpg');
-}
-
-    .hero img {
-      border: 4px solid transparent;
-     border-image: linear-gradient(to right, #7F1D1D, #B7410E, #FF4500) 1;
-    }
-
-    .hero h1 {
-      font-size: 3.4rem; /* slightly larger headline for more presence */
-      margin-bottom: 1rem;
-    }
-
-    .hero p {
-      margin-bottom: 0.2em;
-      line-height: 1.15;
-      text-indent: 0;
-      font-size: clamp(0.72rem, 1vw, 0.95rem);
-      font-family: 'Black Chancery', serif;
-      color: #ccc;
-      max-width: 24rem;
-    }
-    
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    /* Hero bottom CTA (centered under primary CTAs) */
-    .hero-bottom-cta {
-      text-align: center;
-      margin-top: 1rem;
-      font-family: 'Times New Roman', Times, serif;
-    }
-    .hero-bottom-cta .btn {
-      padding: 0.75rem 1.5rem;
-      font-size: 1.2rem;
-    }
-
-    /* Group that holds the top actions and the bottom CTA; this allows the bottom CTA to match the width
-       of the top buttons by using the group's intrinsic width. */
-    .hero-cta-group {
-      display: inline-block;
-      text-align: center;
-      width: auto;
-    }
-
-    /* When the group is inline-block, make the bottom CTA fill the group's width */
-    .hero-cta-group .hero-bottom-cta { width: 100%; }
-    .hero-cta-group .hero-bottom-cta .btn { display: block; width: 100%; }
 
     @media (max-width: 900px) {
       .services-tiles {
@@ -725,15 +690,6 @@ header.nav-open nav ul {
       }
     }
 
-    @media (max-width: 600px) {
-      .hero-bottom-cta { margin-top: 0.6rem; }
-      .hero-bottom-cta .btn { width: 100%; }
-
-      .services-tiles {
-        grid-template-columns: 1fr;
-      }
-    }
-
     .btn {
       padding: 0.75rem 1.5rem;
       font-size: 1.2rem;
@@ -743,26 +699,6 @@ header.nav-open nav ul {
       /* allow color/transform/box-shadow transitions for the hover flare */
       transition: background 0.3s, transform 160ms ease, box-shadow 160ms ease, color 160ms ease;
       font-family: 'Times New Roman', Times, serif;
-    }
-
-    .btn-orange {
-      background-color: #ff7A00;
-      color: white;
-    }
-
-    .btn-orange:hover {
-      background-color: #ff7A00;
-      color: #3d17ca;
-    }
-
-    .btn-white {
-      background-color: #ff7A00;
-      color: white;
-    }
-
-    .btn-white:hover {
-      background-color: #ff7A00;
-      color: #3d17ca;
     }
 
     footer {
@@ -845,31 +781,6 @@ header.nav-open nav ul {
 }
 
 
-/* 🎨 Gallery Container */
-.gallery {
-  padding: 2rem;
-  background: #1a1a1a;
-  font-family: 'BlackChancery', sans-serif;
-}
-
-.gallery h1,
-.gallery h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-  font-family: 'BlackChancery', sans-serif;
-}
-
-.gallery h5 {
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: .9rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--accent);
-  font-style: "Times New Roman", serif;
-  opacity: 0.9;
-}
-
 .gallery-dot-legend {
   display: grid;
   justify-items: center;
@@ -917,150 +828,9 @@ header.nav-open nav ul {
   background: #69db7c;
 }
 
-/* 🖼️ Gallery Layout */
-.gallery-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  width: 100%;
-  max-width: 100vw;
-}
-
-.gallery-track {
-  display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  gap: var(--gap);
-  -webkit-overflow-scrolling: touch;
-  /* Hide native horizontal scrollbar but keep scrolling functional */
-  -ms-overflow-style: auto; /* show scrollbar in IE/Edge */
-  scrollbar-width: thin; /* Firefox: show thin scrollbar */
-  /* Give room for circular arrows so items don't sit behind them */
-  padding: 0 4rem;
-  box-sizing: content-box; /* keep padding outside the flex children */
-  overscroll-behavior-x: contain; /* prevent scroll chaining on mobile */
-}
-
-
-.gallery-track::-webkit-scrollbar-thumb:hover {
-  background: transparent
-
-}
-
-/* Firefox support */
-.gallery-track,
-body {
-  scrollbar-color: orange transparent; /* thumb and track colors */
-  scrollbar-width: none;
-}
-
-/* 📷 Image Styling */
-.gallery-item img {
-  width: 100%;
-  height: auto;
-  max-height: 100%;
-  object-fit: contain; /* ensure full image is visible */
-  display: block;
-  transition: opacity 0.5s ease, box-shadow 0.5s ease, border 0.5s ease;
-  border: none;
-  box-shadow: none;
-  flex-shrink: 0;
-}
-
-
-/* 🧩 Gallery Item with Description Overlay */
-.gallery-item {
-  position: relative;
-  width: clamp(var(--card-min), 28vw, var(--card-max));
-  height: auto; /* let the image determine the height */
-  max-height: 50vh; /* prevent excessively tall items on large screens */
-  overflow: hidden;
-  border-radius: 0.5rem; /* 8px */
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  
-} 
-
-.gallery-item .description {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  color: #ff7A00;
-  opacity: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.25rem; /* ~20px */
-  text-align: center;
-  transition: opacity .4s ease;
-  font-family: "new times roman", serif;
-}
-
-.gallery-item:hover img {
-  opacity: 0.6; 
-}
-
-.gallery-item:hover .description {
-  opacity: 1; /* Slight fade */
-  border: 0.125rem solid #ff7A00; /* 2px */
-  box-shadow: 0 0 15px 0.3125rem #ff7A00; /* 5px -> 0.3125rem */
-}
-
-/* Show description when item is clicked (active state for mobile) */
-.gallery-item.active .description {
-  opacity: 1;
-  border: 0.125rem solid #ff7A00;
-  box-shadow: 0 0 15px 0.3125rem #ff7A00;
-}
-
-
-/* ➡️ Navigation Arrows */
-.arrow {
-  display: flex;                /* Enables flexbox */
-  align-items: center;          /* Vertically center */
-  justify-content: center;      /* Horizontally center */
-  width: 3.75rem;               /* ~60px */
-  height: 3.75rem;
-  background: linear-gradient(to bottom, #3a3a3a, #1a1a1a);
-  color: #FF7A00;
-  border: 0.125rem solid #FF7A00; /* 2px */
-  border-radius: 50%;
-  padding: 0.75rem 1rem;
-  font-size: 2em;
-  font-family: 'BlackChancery', serif;
-  box-shadow: 0 0 0.625rem #FF7A00; /* 10px -> 0.625rem */
-  cursor: pointer;
-  transition: box-shadow 0.3s ease, opacity 0.3s ease;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-}
-
-.arrow.left {
-  left: 0.625rem; /* ~10px */
-}
-
-.arrow.right {
-  right: 0.625rem; /* ~10px */
-}
-
-.arrow:hover {
-  box-shadow: 0 0 20px #ff7A00;
-  opacity: 1;
-}
-
 /* Consolidated "flare" hover style applied to main interactive elements.
-   This keeps behavior consistent across .btn, .service-button, arrows, social links and form buttons. */
+   This keeps behavior consistent across buttons and social links. */
 .btn:hover,
-.service-button:hover,
 .social-links a:hover,
 .contact-form button:hover {
   transform: translateY(-3px) scale(1.03);
@@ -1098,31 +868,6 @@ body {
   100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Ensure gallery items are positioned so loader can be centered over the image */
-.gallery-item { position: relative; }
-
-/* Hide loader by default; JS will show until image loads */
-.image-loader[hidden] { display: none !important; }
-
-/* --- Responsive adjustments: padding, item sizing, arrow sizing --- */
-@media (max-width: 1200px) {
-  .gallery-track {
-    gap: 1.125rem; /* 18px */
-    padding: 0 3.5rem; /* 56px */
-  }
-  .gallery-item {
-    width: 22.5rem; /* 360px */
-    height: auto;
-    max-height: 45vh;
-  }
-  .arrow {
-    width: 3.375rem; /* 54px */
-    height: 3.375rem;
-    font-size: 1.8em;
-    padding: 0.625rem 0.875rem; /* ~10px 14px */
-  }
-} 
-
 @media (max-width: 900px) {
   .hero {
     flex-direction: column;
@@ -1138,105 +883,9 @@ body {
     width: 100%;
   }
 
-  /* Tablet */
-  .gallery-track {
-    gap: 1rem; /* 16px */
-    padding: 0 3rem; /* 48px */
-  }
-  /* Ensure hero columns and inner left content stack and center on tablet sizes */
   .hero-grid { flex-direction: column; gap: 1.25rem; }
-  .hero-right { width: 100%; margin-top: 0.75rem; }
   .hero-crest { width: 100%; max-width: 420px; margin: 0 auto; }
-  .hero-left { flex-direction: column; align-items: center; }
-  .buttons { align-items: center; }
-  .service-button { width: 100%; }
-  /* Stack hero columns on narrower viewports */
-  .hero-grid { flex-direction: column; gap: 1.25rem; }
-  .hero-right { width: 100%; }
-  .hero-crest { width: 100%; max-width: 420px; }
-  .gallery-item {
-    width: 20rem; /* 320px */
-    height: auto;
-    max-height: 40vh;
-  }
-  .gallery-item .description {
-    padding: 1rem;
-    font-size: 0.85rem;
-  }
-  .gallery-item .description ul {
-    max-height: 100%;
-    overflow-y: auto;
-  }
-  .arrow {
-    width: 3.125rem; /* 50px */
-    height: 3.125rem;
-    font-size: 1.6em;
-    padding: 0.625rem 0.75rem; /* ~10px 12px */
-  }
 } 
-
-@media (max-width: 600px) {
-  /* Mobile phones: use viewport-based sizes so items fit nicely and avoid image cropping */
-  .gallery {
-    padding: 1.5rem 0; /* Reduce padding to give more space for gallery */
-  }
-  .gallery-wrapper {
-    padding: 0 0.5rem; /* Add padding to wrapper for arrows */
-  }
-  .gallery-track {
-    gap: 0.5rem; /* 8px */
-    padding: 0 3.5rem; /* Make room for arrows on left and right */
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-  }
-  .gallery-item {
-    flex: 0 0 calc(100vw - 4rem); /* Full viewport width minus wrapper padding and small buffer */
-    width: calc(100vw - 4rem);
-    height: auto; /* let image determine the height */
-    max-height: 45vh; /* Reduced to fit better on mobile */
-    overflow: hidden; /* hide overflow in description */
-    border-radius: 0.5rem;
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-    margin: 0 auto;
-  }
-  .gallery-item img {
-    width: 100%;
-    height: auto;
-    object-fit: contain; /* ensure whole image is visible without cropping */
-    display: block;
-  }
-  .gallery-item .description {
-    padding: 0.75rem;
-    font-size: 0.8rem;
-  }
-  .gallery-item .description ul {
-    list-style: none;
-    max-height: calc(45vh - 1.5rem);
-    overflow-y: auto;
-    font-size: 0.75rem;
-  }
-  .gallery-item .description li {
-    margin: 0.25rem 0;
-  }
-  .gallery-track::-webkit-scrollbar { height: 6px; }
-  .arrow {
-    width: 2.75rem; /* 44px - larger for easier tapping */
-    height: 2.75rem;
-    font-size: 1.3em;
-    padding: 0.5rem;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 20;
-  }
-  .arrow.left {
-    left: 0.25rem; /* 4px from edge */
-  }
-  .arrow.right {
-    right: 0.25rem; /* 4px from edge */
-  }
-}
 
 /* Extra small / mobile polish to keep the homepage responsive and usable */
 @media (max-width: 480px) {
@@ -1259,77 +908,11 @@ body {
     align-items: flex-start;
   }
 
-  .hero-left {
-    flex-direction: column;
-    align-items: center; /* center when stacked so copy is centered below the image */
-    gap: 0.75rem;
-  }
-
   .hero-crest {
     width: 100%;
     max-width: 320px;
     border-radius: 0.5rem;
-    margin: 0 auto; /* center the image when stacked */
-  }
-
-  .buttons {
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: center; /* center CTAs when stacked */
-  }
-
-  .buttons .btn {
-    width: 100%;
-  }
-
-  .hero-right {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-
-  .hero-services { gap: 0.5rem; }
-
-  .service-button {
-    width: 100%;
-    padding: 0.65rem 0.75rem;
-    font-size: 0.95rem;
-  }
-
-  /* Ensure the nav dropdown still fits nicely */
-  nav ul { right: 8px; left: 8px; }
-
-  /* Gallery adjustments for tiny screens */
-  .gallery {
-    padding: 1rem 0;
-  }
-  .gallery h1,
-  .gallery h2 {
-    font-size: clamp(1.2rem, 5vw, 1.5rem);
-    margin-bottom: 0.75rem;
-  }
-  .gallery-wrapper {
-    padding: 0 0.25rem;
-  }
-  .gallery-track {
-    padding: 0 3.5rem; /* Maintain space for arrows */
-  }
-  .gallery-item {
-    flex: 0 0 calc(100vw - 4rem);
-    width: calc(100vw - 4rem);
-    max-height: 42vh;
-  }
-  .gallery-item .description {
-    padding: 0.6rem;
-    font-size: 0.75rem;
-  }
-  .gallery-item .description ul {
-    max-height: calc(42vh - 1.2rem);
-    font-size: 0.7rem;
-  }
-  .arrow {
-    width: 2.75rem;
-    height: 2.75rem;
-    font-size: 1.3em;
+    margin: 0 auto;
   }
 
   /* Contact page mobile polish to ensure vertical-only scrolling */
@@ -1371,13 +954,6 @@ body {
   .social-links img { width: 1.125rem; height: 1.125rem; }
 
   .contact-form button { width: 100%; display: block; }
-}
-
-.arrow img {
-  width: 2.5rem; /* 40px */
-  height: 2.5rem;
-  filter: drop-shadow(0 0 0.3125rem #ff7A00); /* 5px -> 0.3125rem */
-  position: relative;
 }
 
 .phoenix-list {
@@ -1861,8 +1437,6 @@ body {
   .section-highlight { animation: none; background-color: rgba(255, 77, 0, 0.07); }
   /* Remove motion-heavy hover effects for users who prefer reduced motion */
   .btn,
-  .service-button,
-  .arrow,
   .social-links a,
   .contact-form button {
     transition: none !important;

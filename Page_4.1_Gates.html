@@ -33,10 +33,9 @@ event_id: 'eventId0001'
     gtag('config', 'G-XB59Q28VJC');
   </script>
   
-  <title>Crane Fab</title>
-  <meta name="description" content="We want this to be 100 to 150 characters" />
+  <title>Gates Gallery | Crane Fab</title>
+  <meta name="description" content="Explore handcrafted Crane Fab gates, including decorative designs and custom driveway entrances built for each property." />
     <link rel="stylesheet" href="Styles.css" />
-    <link rel= 'stylesheet' href= 'Styles_projects.css' />
   <link href="https://fonts.cdnfonts.com/css/black-chancery" rel="stylesheet" />
 
   <style>
@@ -71,15 +70,13 @@ event_id: 'eventId0001'
       background: #000;
       box-shadow: 0 10px 25px rgba(0,0,0,0.25);
       cursor: pointer;
-      min-height: 250px;
-      transition: none;
+      height: 250px;
     }
 
     .gates-item img {
       display: block;
       width: 100%;
       height: 100%;
-      min-height: 250px;
       object-fit: cover;
       transition: none;
     }
@@ -89,7 +86,6 @@ event_id: 'eventId0001'
       z-index: 1;
       top: 0;
       left: 0;
-      display: block;
       box-sizing: border-box;
       width: 100%;
       padding: 0.65rem 0.75rem;
@@ -121,34 +117,12 @@ event_id: 'eventId0001'
       background: #43a047;
     }
 
-    .gates-item:hover,
-    .gates-item:focus-visible {
-      transform: none;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-      filter: none;
-    }
-
-    .gates-item .description,
-    .gates-item:hover .description,
-    .gates-item.active .description,
-    .gates-item:hover img,
-    .gates-item:focus-visible img {
-      opacity: 1;
-      transform: none;
-      box-shadow: none;
-      filter: none;
-    }
-
     @media (max-width: 900px) {
       .gates-main {
         width: calc(100% - 1rem);
         padding-top: 100px;
       }
 
-      .gates-grid {
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 320px));
-        justify-content: center;
-      }
     }
 
     @media (max-width: 600px) {
@@ -157,9 +131,8 @@ event_id: 'eventId0001'
         justify-content: center;
       }
 
-      .gates-item,
-      .gates-item img {
-        min-height: 220px;
+      .gates-item {
+        height: 220px;
       }
     }
   </style>
@@ -185,13 +158,13 @@ event_id: 'eventId0001'
             Gallery <span class="nav-gallery-indicator" aria-hidden="true">▼</span>
           </button>
           <ul id="gallery-submenu" class="nav-submenu">
-            <li><a href="Page_4.1_Gates.html">Gates</a></li>
+            <li><a href="Page_4.1_Gates.html" aria-current="page">Gates</a></li>
             <li><a href="Page_4.2_Metal_Work.html">Metal Work</a></li>
             <li><a href="Page_4.3_Vehicle_Projects.html">Vehicle Projects</a></li>
             <li><a href="Page_4.4_Wood_Work.html">Wood Work</a></li>
           </ul>
         </li>
-        <li><a href="Page_4_Merchandise.html" aria-current="page">Merchandise</a></li>
+        <li><a href="Page_4_Merchandise.html">Merchandise</a></li>
         <li><a href="Page_5_Contact.html">Contact</a></li>
       </ul>
     </nav>
@@ -246,6 +219,46 @@ event_id: 'eventId0001'
         title: 'Arched Driveway Entrance Gate',
         description: 'A custom arched entry created to make a lasting first impression.',
         images: ['Gallery_images/1-gates/arched-driveway-entrance-gate.jpg']
+      },
+      {
+        title: 'Logo Gate',
+        description: 'A custom gate project built by Crane Fab.',
+        images: ['Gallery_images/1-gates/logo gate web.jpg']
+      },
+      {
+        title: 'Flat Top Double Gate',
+        description: 'A custom gate project built by Crane Fab.',
+        images: ['Gallery_images/1-gates/Flat top double top web.jpg']
+      },
+      {
+        title: 'Custom Gate',
+        description: 'A custom gate project built by Crane Fab.',
+        images: ['Gallery_images/1-gates/gate.jpg']
+      },
+      {
+        title: 'Decorative Gate',
+        description: 'A custom gate project built by Crane Fab.',
+        images: ['Gallery_images/1-gates/1930239_1027918502650_6758_n.jpg']
+      },
+      {
+        title: 'Decorative Gate',
+        description: 'A custom gate project built by Crane Fab.',
+        images: ['Gallery_images/1-gates/1930239_1027918142641_5122_n.jpg']
+      },
+      {
+        title: 'Decorative Gate',
+        description: 'A custom gate project built by Crane Fab.',
+        images: ['Gallery_images/1-gates/1471332_10201096183711165_2124545282_n.jpg']
+      },
+      {
+        title: 'Gate Project',
+        description: 'A custom gate project built by Crane Fab.',
+        images: ['Gallery_images/1-gates/100_0089.JPG']
+      },
+      {
+        title: 'Gate Project',
+        description: 'A custom gate project built by Crane Fab.',
+        images: ['Gallery_images/1-gates/100_0065.JPG']
       }
     ];
 
@@ -288,47 +301,9 @@ event_id: 'eventId0001'
       });
     }
 
-    function openModal(imgSrc, title, description, images) {
-      const modal = document.getElementById('modal');
-      const img = document.getElementById('modal-img');
-      const titleEl = document.getElementById('modal-title');
-      const textEl = document.getElementById('modal-text');
-      const gallery = document.getElementById('modal-gallery');
-      const imageList = Array.isArray(images) && images.length ? images : [imgSrc];
-
-      img.src = imgSrc;
-      img.alt = title;
-      titleEl.textContent = title;
-      textEl.textContent = description;
-      gallery.innerHTML = '';
-
-      imageList.forEach((src) => {
-        const thumb = document.createElement('img');
-        thumb.src = src;
-        thumb.alt = title;
-        thumb.title = title;
-        thumb.addEventListener('click', function () {
-          img.src = src;
-        });
-        gallery.appendChild(thumb);
-      });
-
-      modal.style.display = 'block';
-    }
-
-    function closeModal() {
-      const modal = document.getElementById('modal');
-      modal.style.display = 'none';
-    }
-
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') {
-        closeModal();
-      }
-    });
-
     document.addEventListener('DOMContentLoaded', renderGateProjects);
   </script>
+  <script src="gallery-modal.js"></script>
 
   <footer>
     <div class="footer-cta">

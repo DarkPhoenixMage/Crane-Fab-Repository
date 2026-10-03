@@ -33,17 +33,12 @@ event_id: 'eventId0001'
     gtag('config', 'G-XB59Q28VJC');
   </script>
   
-  <title>Crane Fab</title>
-  <meta name="description" content="We want this to be 100 to 150 characters" />
+  <title>Wood Work Gallery | Crane Fab</title>
+  <meta name="description" content="Explore Crane Fab woodwork, including custom furniture, speaker boxes, desks, and handcrafted home pieces." />
     <link rel="stylesheet" href="Styles.css" />
-    <link rel= 'stylesheet' href= 'Styles_projects.css' />
   <link href="https://fonts.cdnfonts.com/css/black-chancery" rel="stylesheet" />
 
   <style>
-    .gallery-subpage {
-      background: #1a1a1a;
-    }
-
     .gallery-subpage-main {
       max-width: 1600px;
       width: calc(100% - 2rem);
@@ -75,18 +70,14 @@ event_id: 'eventId0001'
       background: #000;
       box-shadow: 0 10px 25px rgba(0,0,0,0.25);
       cursor: pointer;
-      min-height: 280px;
       height: 280px;
-      transition: none;
     }
 
     .gallery-subpage-item img {
       display: block;
       width: 100%;
       height: 100%;
-      min-height: 280px;
       object-fit: cover;
-      transition: none;
     }
 
     .gallery-tile-title {
@@ -94,7 +85,6 @@ event_id: 'eventId0001'
       z-index: 1;
       top: 0;
       left: 0;
-      display: block;
       box-sizing: border-box;
       width: 100%;
       padding: 0.65rem 0.75rem;
@@ -125,23 +115,12 @@ event_id: 'eventId0001'
       background: #43a047;
     }
 
-    .gallery-subpage-item:hover,
-    .gallery-subpage-item:focus-visible {
-      transform: none;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-      filter: none;
-    }
-
     @media (max-width: 900px) {
       .gallery-subpage-main {
         width: calc(100% - 1rem);
         padding-top: 100px;
       }
 
-      .gallery-subpage-grid {
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 320px));
-        justify-content: center;
-      }
     }
 
     @media (max-width: 600px) {
@@ -150,10 +129,6 @@ event_id: 'eventId0001'
         justify-content: center;
       }
 
-      .gallery-subpage-item,
-      .gallery-subpage-item img {
-        min-height: 220px;
-      }
     }
   </style>
 
@@ -181,10 +156,10 @@ event_id: 'eventId0001'
             <li><a href="Page_4.1_Gates.html">Gates</a></li>
             <li><a href="Page_4.2_Metal_Work.html">Metal Work</a></li>
             <li><a href="Page_4.3_Vehicle_Projects.html">Vehicle Projects</a></li>
-            <li><a href="Page_4.4_Wood_Work.html">Wood Work</a></li>
+            <li><a href="Page_4.4_Wood_Work.html" aria-current="page">Wood Work</a></li>
           </ul>
         </li>
-        <li><a href="Page_4_Merchandise.html" aria-current="page">Merchandise</a></li>
+        <li><a href="Page_4_Merchandise.html">Merchandise</a></li>
         <li><a href="Page_5_Contact.html">Contact</a></li>
       </ul>
     </nav>
@@ -224,6 +199,68 @@ event_id: 'eventId0001'
   <script>
     const woodWorkProjects = [
       {
+        title: 'Wood Door',
+        description: 'A custom wood door project crafted by Crane Fab.',
+        images: [
+          'Gallery_images/4-Wood_Work/Wood Door/20250709_172030.jpg',
+          'Gallery_images/4-Wood_Work/Wood Door/20250612_165746.jpg'
+        ]
+      },
+      {
+        title: 'Saddle Stand',
+        description: 'A custom saddle stand project crafted by Crane Fab.',
+        images: [
+          'Gallery_images/4-Wood_Work/saddle Stand/20260522_150301.jpg',
+          'Gallery_images/4-Wood_Work/saddle Stand/20260429_161556 1.jpg'
+        ]
+      },
+      {
+        title: 'Crane Fab Speaker Box',
+        description: 'A custom speaker box crafted by Crane Fab.',
+        images: [
+          'Gallery_images/4-Wood_Work/Crane Fab Speaker Box/20250417_171506.jpg',
+          'Gallery_images/4-Wood_Work/Crane Fab Speaker Box/20250417_171512.jpg',
+          'Gallery_images/4-Wood_Work/Crane Fab Speaker Box/20250417_171517.jpg'
+        ]
+      },
+      {
+        title: 'AC Jewel Box',
+        description: 'A handcrafted wooden jewelry box made by Crane Fab.',
+        images: [
+          'Gallery_images/4-Wood_Work/AC Jewel Box/20250818_164920.jpg',
+          'Gallery_images/4-Wood_Work/AC Jewel Box/20250805_164656.jpg',
+          'Gallery_images/4-Wood_Work/AC Jewel Box/20250818_164934.jpg'
+        ]
+      },
+      {
+        title: 'Chess Board With 3D Printed Figures',
+        description: 'A custom chess board project crafted by Crane Fab.',
+        images: [
+          'Gallery_images/4-Wood_Work/Chess Board With 3D Printed Figures/20260202_124712.jpg',
+          'Gallery_images/4-Wood_Work/Chess Board With 3D Printed Figures/20260120_093207.jpg',
+          'Gallery_images/4-Wood_Work/Chess Board With 3D Printed Figures/20260202_124707.jpg'
+        ]
+      },
+      {
+        title: 'CraneFab Corner Desk',
+        description: 'A custom corner desk project crafted by Crane Fab.',
+        images: [
+          'Gallery_images/4-Wood_Work/CraneFab Corner Desk/20251211_160813.jpg',
+          'Gallery_images/4-Wood_Work/CraneFab Corner Desk/20251115_153528.jpg',
+          'Gallery_images/4-Wood_Work/CraneFab Corner Desk/20251210_070044.jpg',
+          'Gallery_images/4-Wood_Work/CraneFab Corner Desk/20251210_100538.jpg',
+          'Gallery_images/4-Wood_Work/CraneFab Corner Desk/20251211_074854.jpg'
+        ]
+      },
+      {
+        title: 'Flame Speaker Box',
+        description: 'A custom speaker box project crafted by Crane Fab.',
+        images: [
+          'Gallery_images/4-Wood_Work/Flame Speaker Box/20250530_160818.jpg',
+          'Gallery_images/4-Wood_Work/Flame Speaker Box/20250522_065238.jpg'
+        ]
+      },
+      {
         title: 'Walnut Bench',
         description: 'A handcrafted bench combining rich wood grain with careful finishing and durable construction.',
         images: ['Gallery_images/4-Wood_Work/20240114_121015.jpg']
@@ -232,6 +269,26 @@ event_id: 'eventId0001'
         title: 'Custom Wood Panel',
         description: 'A custom wood panel built to provide texture, warmth, and detail in a finished space.',
         images: ['Gallery_images/4-Wood_Work/CraneFab_Desk.jpg']
+      },
+      {
+        title: 'Woodwork Project',
+        description: 'A woodwork project crafted by Crane Fab.',
+        images: ['Gallery_images/4-Wood_Work/1930239_1027918022638_4664_n.jpg']
+      },
+      {
+        title: 'Woodwork Project',
+        description: 'A woodwork project crafted by Crane Fab.',
+        images: ['Gallery_images/4-Wood_Work/Img05.jpg']
+      },
+      {
+        title: 'Woodwork Project',
+        description: 'A woodwork project crafted by Crane Fab.',
+        images: ['Gallery_images/4-Wood_Work/20250510_220349.jpg']
+      },
+      {
+        title: 'Woodwork Project',
+        description: 'A woodwork project crafted by Crane Fab.',
+        images: ['Gallery_images/4-Wood_Work/20250429_164927(1).jpg']
       }
     ];
 
@@ -274,47 +331,9 @@ event_id: 'eventId0001'
       });
     }
 
-    function openModal(imgSrc, title, description, images) {
-      const modal = document.getElementById('modal');
-      const img = document.getElementById('modal-img');
-      const titleEl = document.getElementById('modal-title');
-      const textEl = document.getElementById('modal-text');
-      const gallery = document.getElementById('modal-gallery');
-      const imageList = Array.isArray(images) && images.length ? images : [imgSrc];
-
-      img.src = imgSrc;
-      img.alt = title;
-      titleEl.textContent = title;
-      textEl.textContent = description;
-      gallery.innerHTML = '';
-
-      imageList.forEach((src) => {
-        const thumb = document.createElement('img');
-        thumb.src = src;
-        thumb.alt = title;
-        thumb.title = title;
-        thumb.addEventListener('click', function () {
-          img.src = src;
-        });
-        gallery.appendChild(thumb);
-      });
-
-      modal.style.display = 'block';
-    }
-
-    function closeModal() {
-      const modal = document.getElementById('modal');
-      modal.style.display = 'none';
-    }
-
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') {
-        closeModal();
-      }
-    });
-
     document.addEventListener('DOMContentLoaded', renderWoodWorkProjects);
   </script>
+  <script src="gallery-modal.js"></script>
 
   <footer>
     <div class="footer-cta">
